@@ -28,7 +28,7 @@
     <div class="login-container">
         <h2 class="text-center" style="color: #007bff;">TEXTIPRO</h2>
         <h5 class="text-center">Sign in to your account</h5>
-        <form action="/login" method="post">
+        <form action="/login/dashboard" method="post">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required>
