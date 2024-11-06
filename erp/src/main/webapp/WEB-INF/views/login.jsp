@@ -6,7 +6,7 @@
     <title>Login</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Custom styling */
+  	      /* Custom styling */
         body {
             background-color: #f3f4f6;
         }
@@ -23,6 +23,7 @@
             border: none;
         }
     </style>
+    
 </head>
 <body>
     <div class="login-container">

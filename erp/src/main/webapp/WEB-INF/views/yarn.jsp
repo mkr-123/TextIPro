@@ -53,8 +53,8 @@
                 <h4>Yarn Master</h4>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Settings</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add Yarn</li>
+                        <li class="breadcrumb-item">Settings</li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/master/addYarn">Add Yarn</a></li>
                     </ol>
                 </nav>
             </div>
