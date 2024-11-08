@@ -10,9 +10,9 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Unit {
+public class Uom {
 	@Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long unitId;
+	private Long uomId;
 	private String unitName;
 }

@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Yarn Master</title>
     <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file if needed -->
+     <link href="<c:url value='/css/universal.css' />" rel="stylesheet">
     <style>
         /* Main body styling */
         body {
@@ -89,6 +90,7 @@
         .add-button:hover {
             background-color: #45a049;
         }
+  
         
         /* Additional layout adjustments for responsiveness */
         @media (max-width: 768px) {
@@ -109,33 +111,52 @@
      <main role="main" class="col-md-10 ml-sm-auto px-4">
     
          <!-- Page Header -->
-            <jsp:include page="pageheader.jsp"></jsp:include>
+           <div class="content-header d-flex justify-content-between align-items-center">
+                <h4>Yarn Master</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">Settings</li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/master/yarnList">List</a></li>
+                    </ol>
+                </nav>
+            </div>
             <!-- form Data -->
-        <form action="yourServletURL" method="post" class="form-container">
+        <form action="${pageContext.request.contextPath}/master/saveYarn" method="post" class="form-container">
             <div class="form-group">
-                <label for="yanName">Name</label>
-                <input type="text" id="yanName" name="yanName" placeholder="Yan Name">
+                <label for="yarnName">Name<sup class="mandatory">*</sup></label>
+                <input type="text" id="yarnName" name="yarnName" placeholder="Yarn Name" required="required" oninvalid="this.setCustomValidity('Please enter the yarn name')" oninput="this.setCustomValidity('')">
             </div>
             <div class="form-group">
-                <label for="units">Units</label>
-                <input type="text" id="units" name="units" placeholder="Units">
-            </div>
-            <div class="form-group">
-                <label for="counts">Counts</label>
-                <select id="counts" name="counts">
+                <label for="units">Units<sup class="mandatory">*</sup></label>
+               
+                <select id="units" name="uom" required 
+        oninvalid="this.setCustomValidity('Please select a UOM')"
+        oninput="this.setCustomValidity('')">
                     <option value="">Please Select</option>
-                    <option value="count1">Count 1</option>
-                    <option value="count2">Count 2</option>
+                    <c:forEach items="${uomList}" var="uom">
+                    <option value="${uom.uomId}">${uom.unitName}</option>
+                    </c:forEach>
                     <!-- Add more options as needed -->
                 </select>
             </div>
             <div class="form-group">
-                <label for="types">Types</label>
-                <input type="text" id="types" name="types" placeholder="Types">
+                <label for="counts">Counts<sup class="mandatory">*</sup></label>
+                <select id="counts" name="count" required 
+        oninvalid="this.setCustomValidity('Please select a count')"
+        oninput="this.setCustomValidity('')">
+                    <option value="">Please Select</option>
+                    <option value="1">Count 1</option>
+                    <option value="2">Count 2</option>
+                    <!-- Add more options as needed -->
+                </select>
             </div>
             <div class="form-group">
-                <label for="conversion">Conversion</label>
-                <input type="text" id="conversion" name="conversion" placeholder="Setting Name">
+                <label for="types">Types<sup class="mandatory">*</sup></label>
+                <input type="text" id="types" name="types" placeholder="Types" required="required" oninvalid="this.setCustomValidity('Please enter the types')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="form-group">
+                <label for="conversion">Conversion<sup class="mandatory">*</sup></label>
+                <input type="number" id="conversion" name="conversion" placeholder="Setting Name" required="required" oninvalid="this.setCustomValidity('Please enter the conversion')" oninput="this.setCustomValidity('')">
             </div>
             <div class="form-group">
                 <button type="submit" class="add-button">Add</button>
