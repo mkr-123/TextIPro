@@ -2,15 +2,26 @@ package com.textipro.erp.service;
 
 import java.util.List;
 
-import com.textipro.erp.entity.Uom;
+import org.springframework.data.domain.Page;
+
+import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.YarnMaster;
 
 public interface MasterService {
 	
 	
 	
-	public List<Uom> getUomList();
+	public List<CommonSettings> getCommonSettingsBasedOnList(String type);
 
 	public void saveYarn(YarnMaster yarnMaster);
+
+	public Page<YarnMaster> getYarnListPageWise(int pageEnteries, int pageNum);
+
+	public Page<CommonSettings> getCommonSettingListPageWise(int pageEnteries, int pageNum);
+
+	public void saveCommonSetting(CommonSettings commonSettings);
+
+	public YarnMaster getYarnMasterId(Long yarnMasterId);
+
 
 }
