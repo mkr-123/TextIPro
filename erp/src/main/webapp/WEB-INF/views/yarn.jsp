@@ -193,8 +193,6 @@
                         </c:if>
                         <c:if test="${empty yarnList}">
                         <tr id="empty_row">
-
-                        
                         </tr>
                         </c:if>
                     </tbody>

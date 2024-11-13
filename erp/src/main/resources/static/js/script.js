@@ -1,7 +1,7 @@
 /**
  * 
  */
-/*This Script is show no record found when data is empty*/
+/*This Script is to show no record found when data is empty*/
 
  $().ready(function(){
          const headCount=$(".table thead th").length;
