@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
+<!--To link Universal CSS  -->
+ <link href="<c:url value='/css/universal.css' />" rel="stylesheet">
   <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome for icons -->
@@ -19,6 +22,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- Custom JS -->
 <script src="${pageContext.request.contextPath}/js/script.js"></script>
+<!--favicon  -->
+<link href="${pageContext.request.contextPath}/favicon.png" rel="shortcut icon">
 </head>
 <body>
     <!-- Sidebar -->
@@ -37,6 +42,9 @@
                         </a>
                         <div id="masterSubmenu" class="collapse">
                             <ul class="nav flex-column ml-3">
+                            	<li class="nav-item">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/master/settingList"><i class="fa fa-gear"></i>Settings</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="${pageContext.request.contextPath}/master/yarnList"><i class="fas fa-yarn"></i> Yarn Master</a>
                                 </li>
