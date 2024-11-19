@@ -10,22 +10,24 @@
     <script type="text/javascript">
     $().ready(function(){
     	$("#entries").val(${pageEnteries});
+    	$("#pageNo").text(${pageNum+1});
     });
     
     function preOrNextPage(nextorPre){
-    	/* <c:if test="${(pageNum-1) le 0}"> */
+    	/* if($("#pageNum").val()-1>=0 ){ */
     	if(nextorPre==1){
     		$("#pageNum").val(${pageNum+1});
     	}else{
     		$("#pageNum").val(${pageNum-1});
-    	}
+    	}  
+    	$("#pageNo").text($("#pageNum").val());
     	$("#pageEnteries").val(${pageEnteries});
     	$("#entries").val(${pageEnteries});
     	$("#form").submit();
-    	/* </c:if>
-    	<c:if test="${(pageNum-1) le 0}"> */
-    	/* alert("page number can't be less than 0");
-    	</c:if> */
+    	/* }else{
+    	$("#pageNum").val(0);
+    	 alert("page number can't be less than 0");
+    	} */
     }
     
     function enteries(enteriesVal){
@@ -125,54 +127,6 @@
                         </tr>
                     </thead>
                     <tbody>
-          <!--               <tr>
-                            <td>1</td>
-                            <td>Test Yarn</td>
-                            <td>0</td>
-                            <td>100</td>
-                            <td>Test Yarn</td>
-                            <td>154.00</td>
-                            <td>
-                                <button class="btn btn-sm btn-edit">Edit</button>
-                                <button class="btn btn-sm btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Yarn3</td>
-                            <td>4</td>
-                            <td>Nos</td>
-                            <td>Types</td>
-                            <td>1.00</td>
-                            <td>
-                                <button class="btn btn-sm btn-edit">Edit</button>
-                                <button class="btn btn-sm btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Yarn2</td>
-                            <td>3</td>
-                            <td>Nos</td>
-                            <td>Types</td>
-                            <td>121.00</td>
-                            <td>
-                                <button class="btn btn-sm btn-edit">Edit</button>
-                                <button class="btn btn-sm btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Yarn1</td>
-                            <td>12</td>
-                            <td>Nos</td>
-                            <td>Types</td>
-                            <td>82.00</td>
-                            <td>
-                                <button class="btn btn-sm btn-edit">Edit</button>
-                                <button class="btn btn-sm btn-delete">Delete</button>
-                            </td>
-                        </tr> -->
                         <c:set var="prevIndex" value="${index}"/>
                         <c:if test="${not empty yarnList}">
                         <c:forEach items="${yarnList}" var="yarnList">
@@ -184,9 +138,8 @@
                             <td>${yarnList.commonSettingsForTypes.settingsName}</td>
                             <td>${yarnList.conversion}</td>
                             <td>
-                                <%-- <button class="btn btn-sm btn-edit" onclick="editOrDeleteThepage(${yarnList.yarnMasterId},1)">Edit</button> --%>
                                 <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/yarnMasterEdit/${yarnList.yarnMasterId}">Edit</a>
-                                <button class="btn btn-sm btn-delete">Delete</button>
+                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/yarnMasterDelete/${yarnList.yarnMasterId}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
                             </td>
                         </tr>
                         </c:forEach>
@@ -204,7 +157,7 @@
                     <nav aria-label="Page navigation">
                         <ul class="pagination pagination-sm">
                             <li class="page-item "><a class="page-link" href="#" onclick="preOrNextPage(0)">Previous</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active" ><a class="page-link" href="#" id="pageNo"></a></li>
                             <li class="page-item"><a class="page-link" href="#" onclick="preOrNextPage(1)">Next</a></li>
                         </ul>
                     </nav>

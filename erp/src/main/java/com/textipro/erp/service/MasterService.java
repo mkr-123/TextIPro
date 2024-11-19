@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 import com.textipro.erp.entity.CommonSettings;
+import com.textipro.erp.entity.CountryM;
 import com.textipro.erp.entity.YarnMaster;
 
 public interface MasterService {
@@ -22,6 +23,10 @@ public interface MasterService {
 	public void saveCommonSetting(CommonSettings commonSettings);
 
 	public YarnMaster getYarnMasterId(Long yarnMasterId);
+
+	public void deleteYarnMaster(Long yarnMasterId);
+
+	public List<CountryM> getCountryList();
 
 
 }

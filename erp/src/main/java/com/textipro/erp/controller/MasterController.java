@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CommonTypes;
+import com.textipro.erp.entity.CountryM;
 import com.textipro.erp.entity.YarnMaster;
 import com.textipro.erp.service.MasterService;
 
@@ -93,5 +94,26 @@ public class MasterController {
 		List<CommonSettings> typeList=masterService.getCommonSettingsBasedOnList(CommonTypes.Types.name());
 		model.addAttribute("typeList", typeList);
 		return "yarnAdd";
+	}
+	
+	@GetMapping("/yarnMasterDelete/{yarnMasterId}")
+	public String yarnMasterDelete(@PathVariable("yarnMasterId") Long yarnMasterId) {
+		masterService.deleteYarnMaster(yarnMasterId);
+		return "redirect:/master/yarnList";
+	}
+	
+	
+	@GetMapping("/buyerCustomerList")
+	public String buyerCustomerList(Model model) {
+		
+		return "buyerCustomerList";
+	}
+	
+	
+	@GetMapping("/addBuyerCustomer")
+	public String addBuyerCustomer(Model model) {
+		List<CountryM> countryMlist=masterService.getCountryList();
+		  model.addAttribute("countryList", countryMlist);
+		return "buyeradd";
 	}
 }

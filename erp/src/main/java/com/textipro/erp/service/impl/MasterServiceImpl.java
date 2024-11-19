@@ -9,8 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.textipro.erp.dao.CommonSettingsDao;
+import com.textipro.erp.dao.CountryMDao;
 import com.textipro.erp.dao.YarnMasterDao;
 import com.textipro.erp.entity.CommonSettings;
+import com.textipro.erp.entity.CountryM;
 import com.textipro.erp.entity.YarnMaster;
 import com.textipro.erp.service.MasterService;
 
@@ -22,6 +24,9 @@ public class MasterServiceImpl implements MasterService{
 	
 	@Autowired
 	private CommonSettingsDao commonSettingsDao;
+	
+	@Autowired
+	private CountryMDao countryMDao;
 
 	@Override
 	public List<CommonSettings> getCommonSettingsBasedOnList(String type) {
@@ -54,6 +59,18 @@ public class MasterServiceImpl implements MasterService{
 	public YarnMaster getYarnMasterId(Long yarnMasterId) {
 		
 		return yarnMasterDao.findById(yarnMasterId).get();
+	}
+
+	@Override
+	public void deleteYarnMaster(Long yarnMasterId) {
+		YarnMaster yarnMaster=getYarnMasterId(yarnMasterId);
+		yarnMasterDao.delete(yarnMaster);
+	}
+
+	@Override
+	public List<CountryM> getCountryList() {
+		// TODO Auto-generated method stub
+		return countryMDao.findAll();
 	}
 
 	
