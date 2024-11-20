@@ -1,6 +1,8 @@
 package com.textipro.erp.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,10 +13,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.textipro.erp.entity.BuyerM;
+import com.textipro.erp.entity.CityM;
 import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CommonTypes;
 import com.textipro.erp.entity.CountryM;
+import com.textipro.erp.entity.StateM;
 import com.textipro.erp.entity.YarnMaster;
 import com.textipro.erp.service.MasterService;
 
@@ -115,5 +121,31 @@ public class MasterController {
 		List<CountryM> countryMlist=masterService.getCountryList();
 		  model.addAttribute("countryList", countryMlist);
 		return "buyeradd";
+	}
+	
+	@GetMapping("/getStates")
+	@ResponseBody
+	public Map<String,Object> getStates(@RequestParam("countryId") Long countryId) {
+		List<StateM> states=masterService.getStatesByCountryId(countryId);
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("stateList", states);
+		map.put("success", true);
+		return map;
+	}
+	
+	@GetMapping("/getCities")
+	@ResponseBody
+	public  Map<String,Object> getCities(@RequestParam("stateId") Long stateId){
+		List<CityM> cityMs=masterService.getCityByStateId(stateId);
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("cityList", cityMs);
+		map.put("success", true);
+		return map;
+	}
+	
+	@PostMapping("/saveBuyerM")
+	public String saveBuyerM(BuyerM buyerM) {
+		masterService.saveBuyerM(buyerM);
+		return "redirect:/master/buyerCustomerList"; 
 	}
 }

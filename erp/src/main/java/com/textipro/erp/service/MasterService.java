@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import com.textipro.erp.entity.BuyerM;
+import com.textipro.erp.entity.CityM;
 import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CountryM;
+import com.textipro.erp.entity.StateM;
 import com.textipro.erp.entity.YarnMaster;
 
 public interface MasterService {
@@ -27,6 +30,12 @@ public interface MasterService {
 	public void deleteYarnMaster(Long yarnMasterId);
 
 	public List<CountryM> getCountryList();
+
+	public List<StateM> getStatesByCountryId(Long countryId);
+
+	public List<CityM> getCityByStateId(Long stateId);
+
+	public void saveBuyerM(BuyerM buyerM);
 
 
 }

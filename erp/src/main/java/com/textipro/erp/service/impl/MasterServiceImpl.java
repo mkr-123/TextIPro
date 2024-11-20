@@ -8,11 +8,17 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.textipro.erp.dao.BuyerMDao;
+import com.textipro.erp.dao.CityMDao;
 import com.textipro.erp.dao.CommonSettingsDao;
 import com.textipro.erp.dao.CountryMDao;
+import com.textipro.erp.dao.StateMDao;
 import com.textipro.erp.dao.YarnMasterDao;
+import com.textipro.erp.entity.BuyerM;
+import com.textipro.erp.entity.CityM;
 import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CountryM;
+import com.textipro.erp.entity.StateM;
 import com.textipro.erp.entity.YarnMaster;
 import com.textipro.erp.service.MasterService;
 
@@ -27,6 +33,15 @@ public class MasterServiceImpl implements MasterService{
 	
 	@Autowired
 	private CountryMDao countryMDao;
+	
+	@Autowired
+	private StateMDao stateMDao;
+	
+	@Autowired
+	private CityMDao cityMDao;
+	
+	@Autowired
+	private BuyerMDao buyerMDao;
 
 	@Override
 	public List<CommonSettings> getCommonSettingsBasedOnList(String type) {
@@ -71,6 +86,23 @@ public class MasterServiceImpl implements MasterService{
 	public List<CountryM> getCountryList() {
 		// TODO Auto-generated method stub
 		return countryMDao.findAll();
+	}
+
+	@Override
+	public List<StateM> getStatesByCountryId(Long countryId) {
+
+		return stateMDao.getStatesByCountryId(countryId);
+	}
+
+	@Override
+	public List<CityM> getCityByStateId(Long stateId) {
+		
+		return cityMDao.getCityByStateId(stateId);
+	}
+
+	@Override
+	public void saveBuyerM(BuyerM buyerM) {
+		buyerMDao.save(buyerM);
 	}
 
 	
