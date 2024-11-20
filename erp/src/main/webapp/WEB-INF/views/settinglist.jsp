@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings Master</title>
+    <link href="<c:url value='/css/listpage.css' />" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
     $().ready(function(){
@@ -38,37 +39,7 @@
 
     <!-- Custom CSS -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .content-header {
-            background-color: #f8f9fa;
-            padding: 15px;
-        }
-        .content-header h4 {
-            margin: 0;
-            font-weight: bold;
-        }
-        .table-container {
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 20px;
-        }
-        .btn-edit {
-            background-color: #28a745;
-            color: #fff;
-            font-weight: bold;
-        }
-        .btn-delete {
-            background-color: #dc3545;
-            color: #fff;
-            font-weight: bold;
-        }
-        .breadcrumb {
-            background: transparent;
-            padding: 0;
-            margin-bottom: 0;
-        }
+   
     </style>
 </head>
 <body>

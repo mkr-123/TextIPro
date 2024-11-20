@@ -5,18 +5,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yarn Master</title>
-     <link href="<c:url value='/css/listpage.css' />" rel="stylesheet">
+    <title>Buyer/Customer Master</title>
+    <link href="<c:url value='/css/listpage.css' />" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
-    const pageNum = ${pageNum};
-    const pageEntries = ${pageEnteries};
+    $().ready(function(){
+    	$("#entries").val(${pageEnteries});
+    	$("#pageNo").text(${pageNum+1});
+    });
+    
+    function preOrNextPage(nextorPre){
+    	/* if($("#pageNum").val()-1>=0 ){ */
+    	if(nextorPre==1){
+    		$("#pageNum").val(${pageNum+1});
+    	}else{
+    		$("#pageNum").val(${pageNum-1});
+    	}  
+    	$("#pageNo").text($("#pageNum").val());
+    	$("#pageEnteries").val(${pageEnteries});
+    	$("#entries").val(${pageEnteries});
+    	$("#form").submit();
+    	/* }else{
+    	$("#pageNum").val(0);
+    	 alert("page number can't be less than 0");
+    	} */
+    }
+    
+    function enteries(enteriesVal){
+    	$("#pageNum").val(${pageNum});
+    	$("#pageEnteries").val(enteriesVal);
+    	$("#form").submit();
+    }
+    
+    
     </script>
 
-	<script src="${pageContext.request.contextPath}/js/listpage.js"></script>
     <!-- Custom CSS -->
     <style>
-        
+
     </style>
 </head>
 <body>
@@ -33,11 +59,11 @@
         <main role="main" class="col-md-10 ml-sm-auto px-4">
             <!-- Page Header -->
             <div class="content-header d-flex justify-content-between align-items-center">
-                <h4>Yarn Master</h4>
+                <h4>Buyer/Customer Master</h4>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">Settings</li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/master/addYarn">Add Yarn</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/master/addBuyerCustomer">Add Buyer</a></li>
                     </ol>
                 </nav>
             </div>
@@ -45,7 +71,7 @@
             <!-- Data Table -->
             <div class="table-container mt-4">
                 <div class="d-flex justify-content-between mb-2">
-                    <h5>Yarn Master</h5>
+                    <h5>Buyer/Customer Master</h5>
                     <div>
                         <label for="entries">Show</label>
                         <select id="entries"  class="form-control d-inline-block" style="width: 70px;" onchange="enteries(this.value)">
