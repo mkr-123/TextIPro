@@ -110,8 +110,13 @@ public class MasterController {
 	
 	
 	@GetMapping("/buyerCustomerList")
-	public String buyerCustomerList(Model model) {
-		
+	public String buyerCustomerList(Model model,@RequestParam(defaultValue ="1")  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
+		Page<BuyerM> buyerMList=masterService.getBuyerMListPage(pageEnteries,pageNum);
+		model.addAttribute("buyerMList", buyerMList.getContent());
+		model.addAttribute("pageEnteries", pageEnteries);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("index", pageNum*pageEnteries);
+		model.addAttribute("totalItems", buyerMList.getTotalElements());
 		return "buyerCustomerList";
 	}
 	

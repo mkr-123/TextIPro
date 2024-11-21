@@ -3,6 +3,7 @@ package com.textipro.erp.exception;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.java.Log;
 
 @RestControllerAdvice
@@ -33,7 +36,15 @@ public class ExceptionsOfTextIPro {
 		log.log(java.util.logging.Level.SEVERE, "Exception stack trace: ", ex);
 		return "not there";
 	}
-	
+	@ExceptionHandler(value=ConstraintViolationException.class)
+	public String validation(HttpServletRequest httpServletRequest,ConstraintViolationException cx) {
+		log.severe("An error occurred while processing the request: " + httpServletRequest.getRequestURI());
+		log.log(java.util.logging.Level.SEVERE, "Exception stack trace: ", cx.getStackTrace());
+		String errorMessage = cx.getConstraintViolations().stream()
+                .map(ConstraintViolation::getMessage) 
+                .collect(Collectors.joining(", "));
+		return errorMessage;
+	}
 	
     @ExceptionHandler(value = Exception.class)
     public String exceptions(HttpServletRequest httpServletRequest, Exception ex) {

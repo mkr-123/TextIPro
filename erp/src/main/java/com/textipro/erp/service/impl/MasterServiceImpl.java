@@ -105,6 +105,12 @@ public class MasterServiceImpl implements MasterService{
 		buyerMDao.save(buyerM);
 	}
 
+	@Override
+	public Page<BuyerM> getBuyerMListPage(int pageEnteries, int pageNum) {
+		Pageable pageable = PageRequest.of(pageNum, pageEnteries);
+		return buyerMDao.findAll(pageable);
+	}
+
 	
 	
 

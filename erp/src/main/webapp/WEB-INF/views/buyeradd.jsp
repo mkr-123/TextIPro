@@ -11,6 +11,27 @@
     </style>
     <script type="text/javascript">
     const contextPath = '${pageContext.request.contextPath}';
+    function validateForm() {
+    	if($("#mobileNo").val()!=''){
+        const mobileNo = document.getElementById("mobileNo").value;
+        const mobilePattern = /^[0-9]{10}$/;
+
+        if (!mobilePattern.test(mobileNo)) {
+            alert("Mobile number must be exactly 10 digits.");
+            return false; // Prevent form submission
+        }
+    	}
+    	if($("#panCard").val()!=''){
+    		$("#panCard").val($("#panCard").val().toUpperCase());
+    		const panNo=$("#panCard").val();
+    		const panNoPattern=/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+    		if(!panNoPattern.test(panNo)){
+    			alert("Invalid PAN number. It should be in the format: AAAAA9999A (5 letters, 4 digits, 1 letter).");
+    			return false;
+    		}
+    	}
+        return true; 
+    }
     </script>
        <script src="${pageContext.request.contextPath}/js/togetstateandcitybasedoncountry.js"></script>
 </head>
@@ -35,7 +56,7 @@
                 </nav>
             </div>
             <!-- form Data -->
-        <form action="${pageContext.request.contextPath}/master/saveBuyerM" method="post" class="form-container">
+        <form action="${pageContext.request.contextPath}/master/saveBuyerM" onsubmit="return validateForm();" method="post" class="form-container">
             <div class="form-group">
                 <label for="buyerName">Buyer Name<sup class="mandatory">*</sup></label>
                 <input type="text" id="buyerName" name="buyerName" placeholder="Buyer Name" required="required" oninvalid="this.setCustomValidity('Please enter the Buyer name')" oninput="this.setCustomValidity('')" value="${yarnMaster.yarnName}">
@@ -47,7 +68,14 @@
             <div class="form-group">
                 <label for="panCard">PAN Card  </label>
                 <input type="text" id="panCard" name="panCard" placeholder="PAN card"  value="${yarnMaster.yarnName}">
-
+            </div>
+             <div class="form-group">
+                <label for="mobileNo">Mobile No</label>
+                <input type="number" id="mobileNo" name="mobileNo" pattern="^[0-9]{10}$"   title="Mobile number must be exactly 10 digits"  placeholder="Mobile No"  value="${yarnMaster.yarnName}">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Email"  value="${yarnMaster.yarnName}">
             </div>
             <div class="form-group">
                 <label for="countryM">Country  </label>

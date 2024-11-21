@@ -37,5 +37,7 @@ public interface MasterService {
 
 	public void saveBuyerM(BuyerM buyerM);
 
+	public Page<BuyerM> getBuyerMListPage(int pageEnteries, int pageNum);
+
 
 }
