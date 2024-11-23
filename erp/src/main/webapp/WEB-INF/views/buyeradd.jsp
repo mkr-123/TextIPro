@@ -59,53 +59,68 @@
         <form action="${pageContext.request.contextPath}/master/saveBuyerM" onsubmit="return validateForm();" method="post" class="form-container">
             <div class="form-group">
                 <label for="buyerName">Buyer Name<sup class="mandatory">*</sup></label>
-                <input type="text" id="buyerName" name="buyerName" placeholder="Buyer Name" required="required" oninvalid="this.setCustomValidity('Please enter the Buyer name')" oninput="this.setCustomValidity('')" value="${yarnMaster.yarnName}">
+                <input type="text" id="buyerName" name="buyerName" placeholder="Buyer Name" required="required" oninvalid="this.setCustomValidity('Please enter the Buyer name')" oninput="this.setCustomValidity('')" value="${buyerM.buyerName}">
             </div>
             <div class="form-group">
                 <label for="gstNo">GST NO  </label>
-				<input type="text" id="gstNo" name="gstNo" placeholder="GST NO"  value="${yarnMaster.yarnName}">
+				<input type="text" id="gstNo" name="gstNo" placeholder="GST NO"  value="${buyerM.gstNo}">
             </div>
             <div class="form-group">
                 <label for="panCard">PAN Card  </label>
-                <input type="text" id="panCard" name="panCard" placeholder="PAN card"  value="${yarnMaster.yarnName}">
+                <input type="text" id="panCard" name="panCard" placeholder="PAN card"  value="${buyerM.panCard}">
             </div>
              <div class="form-group">
                 <label for="mobileNo">Mobile No</label>
-                <input type="number" id="mobileNo" name="mobileNo" pattern="^[0-9]{10}$"   title="Mobile number must be exactly 10 digits"  placeholder="Mobile No"  value="${yarnMaster.yarnName}">
+                <input type="number" id="mobileNo" name="mobileNo" pattern="^[0-9]{10}$"   title="Mobile number must be exactly 10 digits"  placeholder="Mobile No"  value="${buyerM.mobileNo}">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email"  value="${yarnMaster.yarnName}">
+                <input type="email" id="email" name="email" placeholder="Email"  value="${buyerM.email}">
             </div>
             <div class="form-group">
                 <label for="countryM">Country  </label>
           		<select id="countryM" name="countryM" onchange="getState(this.value)">
-                    <option value="">Please Select</option>
+                    <option value="">Please Select </option>
                     <c:forEach items="${countryList}" var="countryList">
-                    <option value="${countryList.countryMId}"${countryList.countryMId == yarnMaster.commonSettingsForTypes.commonSettingsId ? 'selected' : ''}>${countryList.countryName}</option>
+                    <option value="${countryList.countryMId}"${countryList.countryMId == buyerM.countryM.countryMId ? 'selected' : ''}>${countryList.countryName}</option>
                     </c:forEach>
                     <!-- Add more options as needed -->
                 </select>
             </div>
             <div class="form-group">
                 <label for="stateM">State  </label>
-                <select id="stateM" name="stateM" onchange="getCities(this.value)"></select>
+                <select id="stateM" name="stateM" onchange="getCities(this.value)">
+                <c:if test="${not empty  buyerM.buyerMId}">
+                <option value="">Select a State</option>
+                <c:forEach items="${states}" var="states">
+                <option value="${states.stateMId}"${states.stateMId== buyerM.stateM.stateMId}>${states.stateName}</option> 
+                </c:forEach>
+                </c:if>
+                
+                </select>
                             </div>
                   <div class="form-group">
                 <label for="cityM">City  </label>
-            	<select id="cityM" name="cityM"></select>
+            	<select id="cityM" name="cityM">
+            	<c:if test="${not empty  buyerM.buyerMId}">
+            	<option value="">Select a City</option>
+            	<c:forEach items="${cityMs}" var="cityMs">
+            	<option value="${cityMs.cityMId}"${cityMs.cityMId== buyerM.cityM.cityMId}>${cityMs.cityName}</option>
+            	</c:forEach>
+            	</c:if>
+            	</select>
             	            	</div>
                         <div class="form-group">
                 <label for="address">Address  </label>
-                <textarea rows="3" id="address" name="address" placeholder="Setting Name"  value="${yarnMaster.address}"></textarea>
+                <textarea rows="3" id="address" name="address" placeholder="Setting Name" >${buyerM.address}</textarea>
             </div>
                                     <div class="form-group">
                 <label for="image">Image  </label>
-                <input type="file" id="image" name="image" accept="image/*" />
+                <input type="file" id="image" name="image" accept="image/*" src="${buyerM.image}" />
                        </div>
             <div class="form-group">
-            <c:if test="${not empty yarnMaster.yarnMasterId}"><input type="hidden" name="yarnMasterId" value="${yarnMaster.yarnMasterId}"></c:if>
-                <button type="submit" class="add-button"><c:if test="${empty yarnMaster.yarnMasterId}">Add</c:if><c:if test="${not empty yarnMaster.yarnMasterId}">Update</c:if></button>
+            <c:if test="${not empty  buyerM.buyerMId}"><input type="hidden" name="buyerMId" value="${buyerM.buyerMId}"></c:if>
+                <button type="submit" class="add-button"><c:if test="${empty  buyerM.buyerMId}">Add</c:if><c:if test="${not empty  buyerM.buyerMId}">Update</c:if></button>
             </div>
         </form>
         </main>

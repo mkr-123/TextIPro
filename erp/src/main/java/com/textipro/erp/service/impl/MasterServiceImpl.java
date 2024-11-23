@@ -111,6 +111,27 @@ public class MasterServiceImpl implements MasterService{
 		return buyerMDao.findAll(pageable);
 	}
 
+	@Override
+	public BuyerM getBuyerMgetById(Long buyerMId) {
+		return buyerMDao.findById(buyerMId).get();
+	}
+
+	@Override
+	public List<StateM> getStatesList() {
+		return stateMDao.findAll();
+	}
+
+	@Override
+	public List<CityM> getCityList() {
+		return cityMDao.findAll();
+	}
+
+	@Override
+	public void deleteBuyerM(Long buyerMId) {
+		BuyerM buyerM=getBuyerMgetById(buyerMId);
+		buyerMDao.delete(buyerM);
+	}
+
 	
 	
 

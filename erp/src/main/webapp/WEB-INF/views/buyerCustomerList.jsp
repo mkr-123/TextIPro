@@ -78,8 +78,8 @@
                             <td>${buyerMList.mobileNo}</td>
                             <td>${buyerMList.cityM.cityName}</td>
                             <td>
-                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/yarnMasterEdit/${buyerMList.buyerMId}">Edit</a>
-                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/yarnMasterDelete/${buyerMList.buyerMId}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/buyerMasterEdit/${buyerMList.buyerMId}">Edit</a>
+                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/buyerMasterDelete/${buyerMList.buyerMId}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
                             </td>
                         </tr>
                         </c:forEach>
