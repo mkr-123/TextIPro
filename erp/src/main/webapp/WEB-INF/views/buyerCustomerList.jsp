@@ -9,44 +9,17 @@
     <link href="<c:url value='/css/listpage.css' />" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
-    $().ready(function(){
-    	$("#entries").val(${pageEnteries});
-    	$("#pageNo").text(${pageNum+1});
-    });
-    
-    function preOrNextPage(nextorPre){
-    	/* if($("#pageNum").val()-1>=0 ){ */
-    	if(nextorPre==1){
-    		$("#pageNum").val(${pageNum+1});
-    	}else{
-    		$("#pageNum").val(${pageNum-1});
-    	}  
-    	$("#pageNo").text($("#pageNum").val());
-    	$("#pageEnteries").val(${pageEnteries});
-    	$("#entries").val(${pageEnteries});
-    	$("#form").submit();
-    	/* }else{
-    	$("#pageNum").val(0);
-    	 alert("page number can't be less than 0");
-    	} */
-    }
-    
-    function enteries(enteriesVal){
-    	$("#pageNum").val(${pageNum});
-    	$("#pageEnteries").val(enteriesVal);
-    	$("#form").submit();
-    }
-    
-    
+    const pageNum = ${pageNum};
+    const pageEntries = ${pageEnteries};
     </script>
-
+	<script src="${pageContext.request.contextPath}/js/listpage.js"></script>
     <!-- Custom CSS -->
     <style>
 
     </style>
 </head>
 <body>
-<form name="form" id="form" action="${pageContext.request.contextPath}/master/yarnList">
+<form name="form" id="form" action="${pageContext.request.contextPath}/master/buyerCustomerList">
 <input type="hidden" id="pageNum" name="pageNum" value=""/>
 <input type="hidden" id="pageEnteries" name="pageEnteries" value=""/>
 </form>
@@ -90,32 +63,28 @@
                         <tr>
                             <th>S.No</th>
                             <th>Name</th>
-                            <th>Counts</th>
-                            <th>Units</th>
-                            <th>Types</th>
-                            <th>Conversions</th>
-                            <th>Options</th>
+                            <th>Mobile</th>
+                            <th>City</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:set var="prevIndex" value="${index}"/>
-                        <c:if test="${not empty yarnList}">
-                        <c:forEach items="${yarnList}" var="yarnList">
+                        <c:if test="${not empty buyerMList}">
+                        <c:forEach items="${buyerMList}" var="buyerMList">
                         <tr>
                             <td>${index=index+1}</td>
-                            <td>${yarnList.yarnName}</td>
-                            <td>${yarnList.commonSettingsForCounts.settingsName}</td>
-                            <td>${yarnList.commonSettingsForUnits.settingsName}</td>
-                            <td>${yarnList.commonSettingsForTypes.settingsName}</td>
-                            <td>${yarnList.conversion}</td>
+                            <td>${buyerMList.buyerName}</td>
+                            <td>${buyerMList.mobileNo}</td>
+                            <td>${buyerMList.cityM.cityName}</td>
                             <td>
-                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/yarnMasterEdit/${yarnList.yarnMasterId}">Edit</a>
-                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/yarnMasterDelete/${yarnList.yarnMasterId}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/buyerMasterEdit/${buyerMList.buyerMId}">Edit</a>
+                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/buyerMasterDelete/${buyerMList.buyerMId}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
                             </td>
                         </tr>
                         </c:forEach>
                         </c:if>
-                        <c:if test="${empty yarnList}">
+                        <c:if test="${empty buyerMList}">
                         <tr id="empty_row">
                         </tr>
                         </c:if>

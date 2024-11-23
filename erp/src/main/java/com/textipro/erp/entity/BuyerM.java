@@ -1,5 +1,6 @@
 package com.textipro.erp.entity;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Entity
@@ -32,5 +35,11 @@ public class BuyerM {
 	private String address;
 	@Lob
 	private byte[] image;
+//	@Pattern(regexp = "^[0-9]{10}$", message = "Mobile number must be exactly 10 digits")
+	@Column(unique = true)
+	private String mobileNo;
+	@Email(message = "Invalid email format")
+	@Column(unique = true)
+	private String email;
 
 }

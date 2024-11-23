@@ -37,5 +37,15 @@ public interface MasterService {
 
 	public void saveBuyerM(BuyerM buyerM);
 
+	public Page<BuyerM> getBuyerMListPage(int pageEnteries, int pageNum);
+
+	public BuyerM getBuyerMgetById(Long buyerMId);
+
+	public List<StateM> getStatesList();
+
+	public List<CityM> getCityList();
+
+	public void deleteBuyerM(Long buyerMId);
+
 
 }

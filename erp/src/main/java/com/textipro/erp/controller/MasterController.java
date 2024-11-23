@@ -110,8 +110,13 @@ public class MasterController {
 	
 	
 	@GetMapping("/buyerCustomerList")
-	public String buyerCustomerList(Model model) {
-		
+	public String buyerCustomerList(Model model,@RequestParam(defaultValue ="1")  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
+		Page<BuyerM> buyerMList=masterService.getBuyerMListPage(pageEnteries,pageNum);
+		model.addAttribute("buyerMList", buyerMList.getContent());
+		model.addAttribute("pageEnteries", pageEnteries);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("index", pageNum*pageEnteries);
+		model.addAttribute("totalItems", buyerMList.getTotalElements());
 		return "buyerCustomerList";
 	}
 	
@@ -143,9 +148,44 @@ public class MasterController {
 		return map;
 	}
 	
+	
+	
 	@PostMapping("/saveBuyerM")
 	public String saveBuyerM(BuyerM buyerM) {
 		masterService.saveBuyerM(buyerM);
 		return "redirect:/master/buyerCustomerList"; 
+	}
+	
+	@GetMapping("/buyerMasterEdit/{buyerMasterId}")
+	public String buyerMasterEdit(@PathVariable("buyerMasterId")Long buyerMId,Model model) {
+		BuyerM buyerM=masterService.getBuyerMgetById(buyerMId);
+		model.addAttribute("buyerM", buyerM);
+		
+		List<CountryM> countryMlist=masterService.getCountryList();
+		model.addAttribute("countryList", countryMlist);
+		
+		List<StateM> states=null;
+		if(buyerM.getCountryM()!=null) {
+		 states=masterService.getStatesByCountryId(buyerM.getCountryM().getCountryMId());
+		}else {
+		 states=masterService.getStatesList();
+		}
+		model.addAttribute("states", states);
+		
+		List<CityM> cityMs=null;
+		if(buyerM.getStateM()!=null) {
+			cityMs=masterService.getCityByStateId(buyerM.getStateM().getStateMId());
+		}else {
+			cityMs=masterService.getCityList();
+		}
+		model.addAttribute("cityMs", cityMs);
+		  
+		return "buyeradd";
+	}
+	
+	@GetMapping("/buyerMasterDelete/{buyerMasterId}")
+	public String deleteBuyerByBuyerId(@PathVariable("buyerMasterId")Long buyerMId) {
+		masterService.deleteBuyerM(buyerMId);
+		return "redirect:/master/buyerCustomerList";
 	}
 }
