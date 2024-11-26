@@ -119,6 +119,7 @@
                 <input type="file" id="image" name="image" accept="image/*" src="${buyerM.image}" />
                        </div>
             <div class="form-group">
+            <input type="hidden" name="entityType" value="${entityType}">
             <c:if test="${not empty  buyerM.buyerMId}"><input type="hidden" name="buyerMId" value="${buyerM.buyerMId}"></c:if>
                 <button type="submit" class="add-button"><c:if test="${empty  buyerM.buyerMId}">Add</c:if><c:if test="${not empty  buyerM.buyerMId}">Update</c:if></button>
             </div>
