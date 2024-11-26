@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.textipro.erp.entity.BuyerM;
+import com.textipro.erp.entity.BuyerM.EntityType;
 import com.textipro.erp.entity.CityM;
 import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CommonTypes;
@@ -110,21 +111,25 @@ public class MasterController {
 	
 	
 	@GetMapping("/buyerCustomerList")
-	public String buyerCustomerList(Model model,@RequestParam(defaultValue ="1")  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
-		Page<BuyerM> buyerMList=masterService.getBuyerMListPage(pageEnteries,pageNum);
+	public String buyerCustomerList(Model model,@RequestParam(defaultValue ="1")  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum,@RequestParam("entityTypeString") String entityTypeString) {
+		EntityType entityType = getEntityType(entityTypeString);
+		Page<BuyerM> buyerMList=masterService.getBuyerMListPage(pageEnteries,pageNum,entityType);
 		model.addAttribute("buyerMList", buyerMList.getContent());
 		model.addAttribute("pageEnteries", pageEnteries);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("index", pageNum*pageEnteries);
 		model.addAttribute("totalItems", buyerMList.getTotalElements());
+		model.addAttribute("entityTypeString", entityTypeString);
 		return "buyerCustomerList";
 	}
 	
 	
 	@GetMapping("/addBuyerCustomer")
-	public String addBuyerCustomer(Model model) {
+	public String addBuyerCustomer(Model model,@RequestParam("entityTypeString") String entityTypeString) {
+		EntityType entityType = getEntityType(entityTypeString);
 		List<CountryM> countryMlist=masterService.getCountryList();
 		  model.addAttribute("countryList", countryMlist);
+		  model.addAttribute("entityType", entityType);
 		return "buyeradd";
 	}
 	
@@ -153,7 +158,7 @@ public class MasterController {
 	@PostMapping("/saveBuyerM")
 	public String saveBuyerM(BuyerM buyerM) {
 		masterService.saveBuyerM(buyerM);
-		return "redirect:/master/buyerCustomerList"; 
+		return "redirect:/master/buyerCustomerList?entityTypeString="+buyerM.getEntityType().name(); 
 	}
 	
 	@GetMapping("/buyerMasterEdit/{buyerMasterId}")
@@ -188,4 +193,21 @@ public class MasterController {
 		masterService.deleteBuyerM(buyerMId);
 		return "redirect:/master/buyerCustomerList";
 	}
+	
+	public EntityType getEntityType(String entityTypeString) {
+		EntityType entityType = null;
+		if(entityTypeString.equals("buyer")) {
+			entityType=BuyerM.EntityType.buyer;
+		}else if(entityTypeString.equals("vendor")) {
+			entityType=BuyerM.EntityType.vendor;
+		}else if(entityTypeString.equals("agent")) {
+			entityType=BuyerM.EntityType.agent;
+		}else if(entityTypeString.equals("consignee")) {
+			entityType=BuyerM.EntityType.consignee;
+		}else {
+			entityType=BuyerM.EntityType.transportation;
+		}
+		return entityType;
+	}
+
 }

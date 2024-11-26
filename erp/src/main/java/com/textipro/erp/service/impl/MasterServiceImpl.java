@@ -20,6 +20,7 @@ import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CountryM;
 import com.textipro.erp.entity.StateM;
 import com.textipro.erp.entity.YarnMaster;
+import com.textipro.erp.entity.BuyerM.EntityType;
 import com.textipro.erp.service.MasterService;
 
 @Service
@@ -106,9 +107,9 @@ public class MasterServiceImpl implements MasterService{
 	}
 
 	@Override
-	public Page<BuyerM> getBuyerMListPage(int pageEnteries, int pageNum) {
+	public Page<BuyerM> getBuyerMListPage(int pageEnteries, int pageNum,EntityType entityType) {
 		Pageable pageable = PageRequest.of(pageNum, pageEnteries);
-		return buyerMDao.findAll(pageable);
+		return buyerMDao.findByEntityType(entityType,pageable);
 	}
 
 	@Override

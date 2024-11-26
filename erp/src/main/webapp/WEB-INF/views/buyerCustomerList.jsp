@@ -22,6 +22,7 @@
 <form name="form" id="form" action="${pageContext.request.contextPath}/master/buyerCustomerList">
 <input type="hidden" id="pageNum" name="pageNum" value=""/>
 <input type="hidden" id="pageEnteries" name="pageEnteries" value=""/>
+ <input type="hidden" name="entityTypeString" value="${entityTypeString}">
 </form>
 <div class="container-fluid">
     <div class="row">
@@ -36,7 +37,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">Settings</li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/master/addBuyerCustomer">Add Buyer</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/master/addBuyerCustomer?entityTypeString=${entityTypeString}">Add Buyer</a></li>
                     </ol>
                 </nav>
             </div>

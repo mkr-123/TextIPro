@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 import com.textipro.erp.entity.BuyerM;
+import com.textipro.erp.entity.BuyerM.EntityType;
 import com.textipro.erp.entity.CityM;
 import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CountryM;
@@ -37,7 +38,7 @@ public interface MasterService {
 
 	public void saveBuyerM(BuyerM buyerM);
 
-	public Page<BuyerM> getBuyerMListPage(int pageEnteries, int pageNum);
+	public Page<BuyerM> getBuyerMListPage(int pageEnteries, int pageNum, EntityType buyer);
 
 	public BuyerM getBuyerMgetById(Long buyerMId);
 

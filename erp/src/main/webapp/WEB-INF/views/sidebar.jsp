@@ -52,19 +52,19 @@
                                     <a class="nav-link" href="#"><i class="fas fa-tshirt"></i> Fabric Master</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/master/buyerCustomerList"><i class="fas fa-users"></i> Buyers / Customers</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/master/buyerCustomerList?entityTypeString=buyer"><i class="fas fa-users"></i> Buyers / Customers</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fas fa-truck"></i> Vendors / Suppliers</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/master/buyerCustomerList?entityTypeString=vendor"><i class="fas fa-truck"></i> Vendors / Suppliers</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fas fa-user-tie"></i> Sales Agents</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/master/buyerCustomerList?entityTypeString=agent"><i class="fas fa-user-tie"></i> Sales Agents</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fas fa-user-check"></i> Consignee</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/master/buyerCustomerList?entityTypeString=consignee"><i class="fas fa-user-check"></i> Consignee</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fas fa-shipping-fast"></i> Transportation</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/master/buyerCustomerList?entityTypeString=transportation"><i class="fas fa-shipping-fast"></i> Transportation</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#"><i class="fas fa-file-signature"></i> Terms</a>
