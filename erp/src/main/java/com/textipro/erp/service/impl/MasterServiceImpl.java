@@ -103,6 +103,12 @@ public class MasterServiceImpl implements MasterService{
 
 	@Override
 	public void saveBuyerM(BuyerM buyerM) {
+		if (buyerM.getEmail() != null && buyerM.getEmail().isEmpty()) {
+		    buyerM.setEmail(null);
+		}
+		if (buyerM.getMobileNo() != null && buyerM.getMobileNo().isEmpty()) {
+		    buyerM.setMobileNo(null);
+		}
 		buyerMDao.save(buyerM);
 	}
 

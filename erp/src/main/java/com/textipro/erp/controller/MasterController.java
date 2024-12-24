@@ -161,8 +161,8 @@ public class MasterController {
 		return "redirect:/master/buyerCustomerList?entityTypeString="+buyerM.getEntityType().name(); 
 	}
 	
-	@GetMapping("/buyerMasterEdit/{buyerMasterId}")
-	public String buyerMasterEdit(@PathVariable("buyerMasterId")Long buyerMId,Model model) {
+	@GetMapping("/buyerMasterEdit/{buyerMasterId}/{entityTypeString}")
+	public String buyerMasterEdit(@PathVariable("buyerMasterId")Long buyerMId,Model model,@PathVariable("entityTypeString")String entityTypeString) {
 		BuyerM buyerM=masterService.getBuyerMgetById(buyerMId);
 		model.addAttribute("buyerM", buyerM);
 		
@@ -184,14 +184,15 @@ public class MasterController {
 			cityMs=masterService.getCityList();
 		}
 		model.addAttribute("cityMs", cityMs);
+		model.addAttribute("entityType", entityTypeString);
 		  
 		return "buyeradd";
 	}
 	
-	@GetMapping("/buyerMasterDelete/{buyerMasterId}")
-	public String deleteBuyerByBuyerId(@PathVariable("buyerMasterId")Long buyerMId) {
+	@GetMapping("/buyerMasterDelete/{buyerMasterId}/{entityTypeString}")
+	public String deleteBuyerByBuyerId(@PathVariable("buyerMasterId")Long buyerMId,@PathVariable("entityTypeString") String entityTypeString) {
 		masterService.deleteBuyerM(buyerMId);
-		return "redirect:/master/buyerCustomerList";
+		return "redirect:/master/buyerCustomerList?entityTypeString="+entityTypeString; 
 	}
 	
 	public EntityType getEntityType(String entityTypeString) {
