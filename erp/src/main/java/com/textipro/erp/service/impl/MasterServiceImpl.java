@@ -13,12 +13,14 @@ import com.textipro.erp.dao.CityMDao;
 import com.textipro.erp.dao.CommonSettingsDao;
 import com.textipro.erp.dao.CountryMDao;
 import com.textipro.erp.dao.StateMDao;
+import com.textipro.erp.dao.TermMasterDao;
 import com.textipro.erp.dao.YarnMasterDao;
 import com.textipro.erp.entity.BuyerM;
 import com.textipro.erp.entity.CityM;
 import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CountryM;
 import com.textipro.erp.entity.StateM;
+import com.textipro.erp.entity.TermMaster;
 import com.textipro.erp.entity.YarnMaster;
 import com.textipro.erp.entity.BuyerM.EntityType;
 import com.textipro.erp.service.MasterService;
@@ -43,6 +45,9 @@ public class MasterServiceImpl implements MasterService{
 	
 	@Autowired
 	private BuyerMDao buyerMDao;
+	
+	@Autowired
+	private TermMasterDao termMasterDao;
 
 	@Override
 	public List<CommonSettings> getCommonSettingsBasedOnList(String type) {
@@ -137,6 +142,17 @@ public class MasterServiceImpl implements MasterService{
 	public void deleteBuyerM(Long buyerMId) {
 		BuyerM buyerM=getBuyerMgetById(buyerMId);
 		buyerMDao.delete(buyerM);
+	}
+
+	@Override
+	public void saveTermMaster(TermMaster termMaster) {
+		termMasterDao.save(termMaster);
+	}
+
+	@Override
+	public Page<TermMaster> getTermMListPage(int pageEnteries, int pageNum) {
+		 Pageable pageable = PageRequest.of(pageNum, pageEnteries);
+		return termMasterDao.findAll(pageable);
 	}
 
 	

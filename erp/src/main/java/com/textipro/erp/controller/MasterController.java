@@ -22,8 +22,11 @@ import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CommonTypes;
 import com.textipro.erp.entity.CountryM;
 import com.textipro.erp.entity.StateM;
+import com.textipro.erp.entity.TermMaster;
 import com.textipro.erp.entity.YarnMaster;
 import com.textipro.erp.service.MasterService;
+
+import constants.TextIProConstants;
 
 @Controller
 @RequestMapping("/master")
@@ -32,7 +35,7 @@ public class MasterController {
 	private MasterService masterService;
 	
 	@GetMapping("/yarnList")
-	public String yarnList(Model model,@RequestParam(defaultValue ="1")  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
+	public String yarnList(Model model,@RequestParam(defaultValue =TextIProConstants.pageLimit)  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
 		Page<YarnMaster> yarnMasterListPageWise=masterService.getYarnListPageWise(pageEnteries,pageNum);
 		model.addAttribute("yarnList", yarnMasterListPageWise.getContent());
 		model.addAttribute("pageEnteries", pageEnteries);
@@ -64,7 +67,7 @@ public class MasterController {
 	
 	
 	@GetMapping("/settingList")
-	public String settingList(Model model,@RequestParam(defaultValue ="1")  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
+	public String settingList(Model model,@RequestParam(defaultValue =TextIProConstants.pageLimit)  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
 		Page<CommonSettings> commonSettings=masterService.getCommonSettingListPageWise(pageEnteries,pageNum);
 //		model.addAttribute("yarnList", yarnMasterListPageWise.getContent());
 		model.addAttribute("pageEnteries", pageEnteries);
@@ -111,7 +114,7 @@ public class MasterController {
 	
 	
 	@GetMapping("/buyerCustomerList")
-	public String buyerCustomerList(Model model,@RequestParam(defaultValue ="1")  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum,@RequestParam("entityTypeString") String entityTypeString) {
+	public String buyerCustomerList(Model model,@RequestParam(defaultValue =TextIProConstants.pageLimit)  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum,@RequestParam("entityTypeString") String entityTypeString) {
 		EntityType entityType = getEntityType(entityTypeString);
 		Page<BuyerM> buyerMList=masterService.getBuyerMListPage(pageEnteries,pageNum,entityType);
 		model.addAttribute("buyerMList", buyerMList.getContent());
@@ -209,6 +212,26 @@ public class MasterController {
 			entityType=BuyerM.EntityType.transportation;
 		}
 		return entityType;
+	}
+	@GetMapping("/termsList")
+	public String getTermsList(Model model,@RequestParam(defaultValue =TextIProConstants.pageLimit)  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
+		Page<TermMaster> termMlist=masterService.getTermMListPage(pageEnteries,pageNum);
+		model.addAttribute("termMlist", termMlist.getContent());
+		model.addAttribute("pageEnteries", pageEnteries);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("index", pageNum*pageEnteries);
+		model.addAttribute("totalItems", termMlist.getTotalElements());
+		return "termsList";
+	}
+	@GetMapping("/addTerm")
+	public String addTrem() {
+		return "addTerm";
+	}
+	
+	@PostMapping("/saveTerm")
+	public String saveTerm(TermMaster termMaster) {
+		masterService.saveTermMaster(termMaster);
+		return"redirect:/master/termsList";
 	}
 
 }

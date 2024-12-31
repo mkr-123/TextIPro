@@ -10,6 +10,7 @@ import com.textipro.erp.entity.CityM;
 import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CountryM;
 import com.textipro.erp.entity.StateM;
+import com.textipro.erp.entity.TermMaster;
 import com.textipro.erp.entity.YarnMaster;
 
 public interface MasterService {
@@ -47,6 +48,10 @@ public interface MasterService {
 	public List<CityM> getCityList();
 
 	public void deleteBuyerM(Long buyerMId);
+
+	public void saveTermMaster(TermMaster termMaster);
+
+	public Page<TermMaster> getTermMListPage(int pageEnteries, int pageNum);
 
 
 }

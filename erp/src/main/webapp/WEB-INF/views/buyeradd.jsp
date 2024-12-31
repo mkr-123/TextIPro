@@ -4,7 +4,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Buyers / Customer</title>
+    <title>
+     <c:if test='${entityTypeString eq "buyer"}'>
+                    Buyer
+                    </c:if>
+                    <c:if test='${entityType eq "vendor"}'>
+                    Vendor
+                    </c:if>
+                    <c:if test='${entityType eq "agent"}'>
+                    Sales agent
+                    </c:if>
+                    <c:if test='${entityType eq "consignee"}'>
+                    Consignee
+                    </c:if>
+                    <c:if test='${entityType eq "transportation"}'>
+                    Transportation
+                    </c:if>
+    </title>
     <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file if needed -->
      <link href="<c:url value='/css/form.css' />" rel="stylesheet"> <!-- Link to your form file -->
     <style>
@@ -47,19 +63,49 @@
     
          <!-- Page Header -->
            <div class="content-header d-flex justify-content-between align-items-center">
-                <h4>Add Buyers / Customers</h4>
+                <h4>
+                 <c:if test='${entityType eq "buyer"}'>
+                    Buyer/Customer Master
+                    </c:if>
+                    <c:if test='${entityType eq "vendor"}'>
+                    Vendor
+                    </c:if>
+                    <c:if test='${entityType eq "agent"}'>
+                    Sales agent
+                    </c:if>
+                    <c:if test='${entityType eq "consignee"}'>
+                    Consignee
+                    </c:if>
+                    <c:if test='${entityType eq "transportation"}'>
+                    Transportation
+                    </c:if>
+                </h4>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">Settings</li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/master/buyerCustomerList">List</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/master/buyerCustomerList?entityTypeString=${entityType}">List</a></li>
                     </ol>
                 </nav>
             </div>
             <!-- form Data -->
         <form action="${pageContext.request.contextPath}/master/saveBuyerM" onsubmit="return validateForm();" method="post" class="form-container">
             <div class="form-group">
-                <label for="buyerName">Buyer Name<sup class="mandatory">*</sup></label>
-                <input type="text" id="buyerName" name="buyerName" placeholder="Buyer Name" required="required" oninvalid="this.setCustomValidity('Please enter the Buyer name')" oninput="this.setCustomValidity('')" value="${buyerM.buyerName}">
+                <label for="buyerName"> <c:if test='${entityType eq "buyer"}'>
+                    Buyer
+                    </c:if>
+                    <c:if test='${entityType eq "vendor"}'>
+                    Vendor
+                    </c:if>
+                    <c:if test='${entityType eq "agent"}'>
+                    Sales agent
+                    </c:if>
+                    <c:if test='${entityType eq "consignee"}'>
+                    Consignee
+                    </c:if>
+                    <c:if test='${entityType eq "transportation"}'>
+                    Transportation
+                    </c:if> Name<sup class="mandatory">*</sup></label>
+                <input type="text" id="buyerName" name="buyerName" placeholder="<c:if test='${entityType eq "buyer"}'>Buyer/Customer Master</c:if><c:if test='${entityType eq "vendor"}'>Vendor</c:if><c:if test='${entityType eq "agent"}'>Sales agent</c:if><c:if test='${entityType eq "consignee"}'>Consignee</c:if><c:if test='${entityType eq "transportation"}'>Transportation</c:if> Name" required="required" oninvalid="this.setCustomValidity('Please enter the Buyer name')" oninput="this.setCustomValidity('')" value="${buyerM.buyerName}">
             </div>
             <div class="form-group">
                 <label for="gstNo">GST NO  </label>

@@ -67,7 +67,7 @@
                                     <a class="nav-link" href="${pageContext.request.contextPath}/master/buyerCustomerList?entityTypeString=transportation"><i class="fas fa-shipping-fast"></i> Transportation</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fas fa-file-signature"></i> Terms</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/master/termsList"><i class="fas fa-file-signature"></i> Terms</a>
                                 </li>
                             </ul>
                         </div>
