@@ -53,5 +53,9 @@ public interface MasterService {
 
 	public Page<TermMaster> getTermMListPage(int pageEnteries, int pageNum);
 
+	public TermMaster getTermMasterId(Long termMasterId);
+
+	public void deleteTermMasterId(Long termDeleteId);
+
 
 }

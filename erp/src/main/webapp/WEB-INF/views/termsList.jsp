@@ -61,18 +61,20 @@
                     </thead>
                     <tbody>
                         <c:set var="prevIndex" value="${index}"/>
-                        <c:if test="${not empty yarnList}">
-                        <c:forEach items="${yarnList}" var="yarnList">
+                        <c:if test="${not empty termMlist}">
+                        <c:forEach items="${termMlist}" var="termMlist">
                         <tr>
                             <td>${index=index+1}</td>
+                            <td>${termMlist.title}</td>
+                            <td>${termMlist.typeOfTerms}</td>
                             <td>
-                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/yarnMasterEdit/${yarnList.yarnMasterId}">Edit</a>
-                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/yarnMasterDelete/${yarnList.yarnMasterId}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/termMasterEdit/${termMlist.termMasterId}">Edit</a>
+                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/termMasterDelete/${termMlist.termMasterId}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
                             </td>
                         </tr>
                         </c:forEach>
                         </c:if>
-                        <c:if test="${empty yarnList}">
+                        <c:if test="${empty termMlist}">
                         <tr id="empty_row">
                         </tr>
                         </c:if>

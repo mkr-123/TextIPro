@@ -233,5 +233,18 @@ public class MasterController {
 		masterService.saveTermMaster(termMaster);
 		return"redirect:/master/termsList";
 	}
+	
+	@GetMapping("/termMasterEdit/{termId}")
+	public String termMasterEdit(@PathVariable("termId") Long termMasterId,Model model) {
+		TermMaster termMaster=masterService.getTermMasterId(termMasterId);
+		model.addAttribute("termMaster", termMaster);
+		return "addTerm";
+	}
+	
+	@GetMapping("/termMasterDelete/{termDelete}")
+	public String termMasterDelete(@PathVariable("termDelete") Long termDeleteId) {
+		masterService.deleteTermMasterId(termDeleteId);
+		return "redirect:/master/termsList";
+	}
 
 }

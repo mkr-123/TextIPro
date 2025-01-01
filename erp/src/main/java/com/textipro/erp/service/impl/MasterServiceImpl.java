@@ -155,6 +155,18 @@ public class MasterServiceImpl implements MasterService{
 		return termMasterDao.findAll(pageable);
 	}
 
+	@Override
+	public TermMaster getTermMasterId(Long termMasterId) {
+		return termMasterDao.findById(termMasterId).get();
+	}
+
+	@Override
+	public void deleteTermMasterId(Long termDeleteId) {
+		TermMaster termMaster=getTermMasterId(termDeleteId);
+		termMasterDao.delete(termMaster);
+		
+		}
+
 	
 	
 

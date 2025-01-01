@@ -33,34 +33,34 @@
                 <label for="typeOfTerms">Type    <sup class="mandatory">*</sup></label>
                 <select id="typeOfTerms" name="typeOfTerms">
                 <option value="">Select Type</option>
-                <option value="paymentTerms">Payment terms</option>
-                <option value="deliveryTerms">Delivery terms</option>
+                <option value="paymentTerms"${termMaster.typeOfTerms=="paymentTerms"?'selected' : ''}>Payment terms</option>
+                <option value="deliveryTerms"${termMaster.typeOfTerms=="deliveryTerms"?'selected' : ''}>Delivery terms</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="title">Title<sup class="mandatory">*</sup></label>
                
-<input type="number" id="title" name="title" placeholder="Setting Name" required="required" oninvalid="this.setCustomValidity('Please enter the conversion')" oninput="this.setCustomValidity('')" value="${yarnMaster.conversion}">
+<input type="text" id="title" name="title" placeholder="Title" required="required" oninvalid="this.setCustomValidity('Please enter the conversion')" oninput="this.setCustomValidity('')" value="${termMaster.title}">
             </div>
             <div class="form-group">
                 <label for="description">Description<sup class="mandatory">*</sup></label>
-              <input type="number" id="description" name="description" placeholder="Setting Name" required="required" oninvalid="this.setCustomValidity('Please enter the conversion')" oninput="this.setCustomValidity('')" value="${yarnMaster.conversion}">
+              <input type="text" id="description" name="description" placeholder="Description" required="required" oninvalid="this.setCustomValidity('Please enter the conversion')" oninput="this.setCustomValidity('')" value="${termMaster.description}">
                     <!-- Add more options as needed -->
             </div>
             <div class="form-group">
                 <label for="noOfDays">No of Days<sup class="mandatory">*</sup></label>
                 <!-- <input type="text" id="types" name="types" placeholder="Types" required="required" oninvalid="this.setCustomValidity('Please enter the types')" oninput="this.setCustomValidity('')"> -->
-          		<input type="number" id="noOfDays" name="noOfDays" placeholder="Setting Name" required="required" oninvalid="this.setCustomValidity('Please enter the conversion')" oninput="this.setCustomValidity('')" value="${yarnMaster.conversion}">
+          		<input type="number" id="noOfDays" name="noOfDays" placeholder="No of Days" required="required" oninvalid="this.setCustomValidity('Please enter the conversion')" oninput="this.setCustomValidity('')" value="${termMaster.noOfDays}">
                     <!-- Add more options as needed -->
             </div>
             
             <div class="form-group">
                 <label for="intrest">Interest<sup class="mandatory">*</sup></label>
-                <input type="number" id="intrest" name="intrest" placeholder="Setting Name" required="required" oninvalid="this.setCustomValidity('Please enter the conversion')" oninput="this.setCustomValidity('')" value="${yarnMaster.conversion}">
+                <input type="number" id="intrest" name="intrest" placeholder="Interest" required="required" oninvalid="this.setCustomValidity('Please enter the conversion')" oninput="this.setCustomValidity('')" value="${termMaster.intrest}">
             </div>
             <div class="form-group">
-            <c:if test="${not empty yarnMaster.yarnMasterId}"><input type="hidden" name="termMasterId" value="${yarnMaster.yarnMasterId}"></c:if>
-                <button type="submit" class="add-button"><c:if test="${empty yarnMaster.yarnMasterId}">Add</c:if><c:if test="${not empty yarnMaster.yarnMasterId}">Update</c:if></button>
+            <c:if test="${not empty termMaster.termMasterId}"><input type="hidden" name="termMasterId" value="${termMaster.termMasterId}"></c:if>
+                <button type="submit" class="add-button"><c:if test="${empty termMaster.termMasterId}">Add</c:if><c:if test="${not empty termMaster.termMasterId}">Update</c:if></button>
             </div>
         </form>
         </main>
