@@ -61,8 +61,8 @@
                     </thead>
                     <tbody>
                         <c:set var="prevIndex" value="${index}"/>
-                        <c:if test="${not empty termMlist}">
-                        <c:forEach items="${termMlist}" var="termMlist">
+                        <c:if test="${not empty datalist}">
+                        <c:forEach items="${datalist}" var="termMlist">
                         <tr>
                             <td>${index=index+1}</td>
                             <td>${termMlist.title}</td>
@@ -74,7 +74,7 @@
                         </tr>
                         </c:forEach>
                         </c:if>
-                        <c:if test="${empty termMlist}">
+                        <c:if test="${empty datalist}">
                         <tr id="empty_row">
                         </tr>
                         </c:if>

@@ -25,8 +25,8 @@ import com.textipro.erp.entity.StateM;
 import com.textipro.erp.entity.TermMaster;
 import com.textipro.erp.entity.YarnMaster;
 import com.textipro.erp.service.MasterService;
-
-import constants.TextIProConstants;
+import com.textipro.util.CommonUtils;
+import com.textipro.util.TextIProConstants;
 
 @Controller
 @RequestMapping("/master")
@@ -37,11 +37,7 @@ public class MasterController {
 	@GetMapping("/yarnList")
 	public String yarnList(Model model,@RequestParam(defaultValue =TextIProConstants.pageLimit)  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
 		Page<YarnMaster> yarnMasterListPageWise=masterService.getYarnListPageWise(pageEnteries,pageNum);
-		model.addAttribute("yarnList", yarnMasterListPageWise.getContent());
-		model.addAttribute("pageEnteries", pageEnteries);
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("index", pageNum*pageEnteries);
-		model.addAttribute("totalItems", yarnMasterListPageWise.getTotalElements());
+		CommonUtils.paginationUtil(yarnMasterListPageWise.getContent(), pageEnteries, pageNum, yarnMasterListPageWise.getTotalElements(), model);
 		return "yarn";
 		
 	}
@@ -117,11 +113,7 @@ public class MasterController {
 	public String buyerCustomerList(Model model,@RequestParam(defaultValue =TextIProConstants.pageLimit)  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum,@RequestParam("entityTypeString") String entityTypeString) {
 		EntityType entityType = getEntityType(entityTypeString);
 		Page<BuyerM> buyerMList=masterService.getBuyerMListPage(pageEnteries,pageNum,entityType);
-		model.addAttribute("buyerMList", buyerMList.getContent());
-		model.addAttribute("pageEnteries", pageEnteries);
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("index", pageNum*pageEnteries);
-		model.addAttribute("totalItems", buyerMList.getTotalElements());
+		CommonUtils.paginationUtil(buyerMList.getContent(), pageEnteries, pageNum, buyerMList.getTotalElements(), model);
 		model.addAttribute("entityTypeString", entityTypeString);
 		return "buyerCustomerList";
 	}
@@ -216,11 +208,7 @@ public class MasterController {
 	@GetMapping("/termsList")
 	public String getTermsList(Model model,@RequestParam(defaultValue =TextIProConstants.pageLimit)  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
 		Page<TermMaster> termMlist=masterService.getTermMListPage(pageEnteries,pageNum);
-		model.addAttribute("termMlist", termMlist.getContent());
-		model.addAttribute("pageEnteries", pageEnteries);
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("index", pageNum*pageEnteries);
-		model.addAttribute("totalItems", termMlist.getTotalElements());
+		CommonUtils.paginationUtil(termMlist.getContent(), pageEnteries, pageNum, termMlist.getTotalElements(), model);
 		return "termsList";
 	}
 	@GetMapping("/addTerm")

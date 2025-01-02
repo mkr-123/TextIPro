@@ -133,8 +133,8 @@
                     </thead>
                     <tbody>
                         <c:set var="prevIndex" value="${index}"/>
-                        <c:if test="${not empty buyerMList}">
-                        <c:forEach items="${buyerMList}" var="buyerMList">
+                        <c:if test="${not empty datalist}">
+                        <c:forEach items="${datalist}" var="buyerMList">
                         <tr>
                             <td>${index=index+1}</td>
                             <td>${buyerMList.buyerName}</td>
@@ -147,7 +147,7 @@
                         </tr>
                         </c:forEach>
                         </c:if>
-                        <c:if test="${empty buyerMList}">
+                        <c:if test="${empty datalist}">
                         <tr id="empty_row">
                         </tr>
                         </c:if>
