@@ -15,6 +15,12 @@
 
 	<script src="${pageContext.request.contextPath}/js/listpage.js"></script>
 </head>
+<body>
+<form name="form" id="form" action="${pageContext.request.contextPath}/master/termsList">
+<input type="hidden" id="pageNum" name="pageNum" value=""/>
+<input type="hidden" id="pageEnteries" name="pageEnteries" value=""/>
+</form>
+
 <div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->

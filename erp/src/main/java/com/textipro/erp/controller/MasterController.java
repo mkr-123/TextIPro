@@ -52,6 +52,9 @@ public class MasterController {
 		
 		List<CommonSettings> typeList=masterService.getCommonSettingsBasedOnList(CommonTypes.Types.name());
 		model.addAttribute("typeList", typeList);
+		
+		List<CommonSettings> colorList=masterService.getCommonSettingsBasedOnList(CommonTypes.Colours.name());
+		model.addAttribute("colorList", colorList);
 		return "yarnAdd";
 	}
 	
@@ -99,6 +102,9 @@ public class MasterController {
 		
 		List<CommonSettings> typeList=masterService.getCommonSettingsBasedOnList(CommonTypes.Types.name());
 		model.addAttribute("typeList", typeList);
+		
+		List<CommonSettings> colorList=masterService.getCommonSettingsBasedOnList(CommonTypes.Colours.name());
+		model.addAttribute("colorList", colorList);
 		return "yarnAdd";
 	}
 	
