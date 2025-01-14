@@ -57,5 +57,7 @@ public interface MasterService {
 
 	public void deleteTermMasterId(Long termDeleteId);
 
+	public List<CommonSettings> getCommonSettingsForWeave(boolean b);
+
 
 }

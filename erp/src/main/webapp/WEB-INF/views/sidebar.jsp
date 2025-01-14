@@ -49,7 +49,7 @@
                                     <a class="nav-link" href="${pageContext.request.contextPath}/master/yarnList"><i class="fas fa-yarn"></i> Yarn Master</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fas fa-tshirt"></i> Fabric Master</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/master/fabricList"><i class="fas fa-tshirt"></i> Fabric Master</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="${pageContext.request.contextPath}/master/buyerCustomerList?entityTypeString=buyer"><i class="fas fa-users"></i> Buyers / Customers</a>

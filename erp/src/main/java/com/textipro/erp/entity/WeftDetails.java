@@ -22,6 +22,6 @@ public class WeftDetails {
 	private Double shrinkagePer;
 	private Double meters;
 	@ManyToOne
-	@JoinColumn(name="fabricId")
+	@JoinColumn(name="fabricId",nullable = false)
 	private Fabric fabric;
 }

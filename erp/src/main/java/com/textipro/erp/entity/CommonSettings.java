@@ -21,5 +21,6 @@ public class CommonSettings {
 	private CommonTypes types;
 	@Column(nullable = false)
 	private String settingsName;
+	private Boolean weaveType;
 
 }

@@ -24,8 +24,11 @@ public class Fabric {
 		FINISHED,
 		FINISHED_SHADE
 	}
+	private Double fabricCode;
 	private String fabricName;
-	//need calrity on weave
+	@ManyToOne
+	@JoinColumn(name = "commonSettingsWeave_id")
+	private CommonSettings commonSettingsForWeave;
 	private Double fabricQuality;
 	@ManyToOne
 	@JoinColumn(name = "commonSettingsUnits_id")
@@ -41,8 +44,8 @@ public class Fabric {
 	private Double sgst;
 	@Lob
 	private byte[] image;
-	@OneToMany
+	@OneToMany(mappedBy = "fabric")
 	private List<WarpDetails> warpDetails;
-	@OneToMany
+	@OneToMany(mappedBy = "fabric")
 	private List<WeftDetails> weftDetails;
 }

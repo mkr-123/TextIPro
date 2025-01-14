@@ -240,5 +240,21 @@ public class MasterController {
 		masterService.deleteTermMasterId(termDeleteId);
 		return "redirect:/master/termsList";
 	}
+	
+	@GetMapping("/fabricList")
+	public String fabricList() {
+		return "fabriclist";
+	}
+	
+	@GetMapping("/addFabric")
+	public String fabricAdd(Model model) {
+		List<CommonSettings> weaveList=masterService.getCommonSettingsForWeave(true);
+		model.addAttribute("weaveList", weaveList);
+		
+		List<CommonSettings> uomList=masterService.getCommonSettingsBasedOnList(CommonTypes.Units.name());
+		model.addAttribute("uomList", uomList);
+		return "fabricadd";
+	}
+	
 
 }

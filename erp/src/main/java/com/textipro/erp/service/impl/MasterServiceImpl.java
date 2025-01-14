@@ -167,6 +167,12 @@ public class MasterServiceImpl implements MasterService{
 		
 		}
 
+	@Override
+	public List<CommonSettings> getCommonSettingsForWeave(boolean b) {
+		// TODO Auto-generated method stub
+		return commonSettingsDao.findAll();
+	}
+
 	
 	
 
