@@ -12,13 +12,17 @@ import com.textipro.erp.dao.BuyerMDao;
 import com.textipro.erp.dao.CityMDao;
 import com.textipro.erp.dao.CommonSettingsDao;
 import com.textipro.erp.dao.CountryMDao;
+import com.textipro.erp.dao.FabricDao;
 import com.textipro.erp.dao.StateMDao;
+import com.textipro.erp.dao.TermMasterDao;
 import com.textipro.erp.dao.YarnMasterDao;
 import com.textipro.erp.entity.BuyerM;
 import com.textipro.erp.entity.CityM;
 import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CountryM;
+import com.textipro.erp.entity.Fabric;
 import com.textipro.erp.entity.StateM;
+import com.textipro.erp.entity.TermMaster;
 import com.textipro.erp.entity.YarnMaster;
 import com.textipro.erp.entity.BuyerM.EntityType;
 import com.textipro.erp.service.MasterService;
@@ -43,6 +47,12 @@ public class MasterServiceImpl implements MasterService{
 	
 	@Autowired
 	private BuyerMDao buyerMDao;
+	
+	@Autowired
+	private TermMasterDao termMasterDao;
+	
+	@Autowired
+	private FabricDao fabricDao;
 
 	@Override
 	public List<CommonSettings> getCommonSettingsBasedOnList(String type) {
@@ -103,6 +113,12 @@ public class MasterServiceImpl implements MasterService{
 
 	@Override
 	public void saveBuyerM(BuyerM buyerM) {
+		if (buyerM.getEmail() != null && buyerM.getEmail().isEmpty()) {
+		    buyerM.setEmail(null);
+		}
+		if (buyerM.getMobileNo() != null && buyerM.getMobileNo().isEmpty()) {
+		    buyerM.setMobileNo(null);
+		}
 		buyerMDao.save(buyerM);
 	}
 
@@ -131,6 +147,47 @@ public class MasterServiceImpl implements MasterService{
 	public void deleteBuyerM(Long buyerMId) {
 		BuyerM buyerM=getBuyerMgetById(buyerMId);
 		buyerMDao.delete(buyerM);
+	}
+
+	@Override
+	public void saveTermMaster(TermMaster termMaster) {
+		termMasterDao.save(termMaster);
+	}
+
+	@Override
+	public Page<TermMaster> getTermMListPage(int pageEnteries, int pageNum) {
+		 Pageable pageable = PageRequest.of(pageNum, pageEnteries);
+		return termMasterDao.findAll(pageable);
+	}
+
+	@Override
+	public TermMaster getTermMasterId(Long termMasterId) {
+		return termMasterDao.findById(termMasterId).get();
+	}
+
+	@Override
+	public void deleteTermMasterId(Long termDeleteId) {
+		TermMaster termMaster=getTermMasterId(termDeleteId);
+		termMasterDao.delete(termMaster);
+		
+		}
+
+	@Override
+	public List<CommonSettings> getCommonSettingsForWeave(boolean b) {
+		// TODO Auto-generated method stub
+		return commonSettingsDao.findAll();
+	}
+
+	@Override
+	public List<YarnMaster> getYarnMasters() {
+		// TODO Auto-generated method stub
+		return yarnMasterDao.findAll();
+	}
+
+	@Override
+	public void saveFabric(Fabric fabric) {
+		// TODO Auto-generated method stub
+		fabricDao.save(fabric);
 	}
 
 	

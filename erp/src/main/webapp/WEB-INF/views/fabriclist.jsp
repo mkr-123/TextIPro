@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yarn Master</title>
+    <title>Fabric Master</title>
      <link href="<c:url value='/css/listpage.css' />" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
@@ -33,11 +33,11 @@
         <main role="main" class="col-md-10 ml-sm-auto px-4">
             <!-- Page Header -->
             <div class="content-header d-flex justify-content-between align-items-center">
-                <h4>Yarn Master</h4>
+                <h4>Fabric Master</h4>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">Settings</li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/master/addYarn">Add Yarn</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/master/addFabric">Add Fabric</a></li>
                     </ol>
                 </nav>
             </div>
@@ -45,7 +45,7 @@
             <!-- Data Table -->
             <div class="table-container mt-4">
                 <div class="d-flex justify-content-between mb-2">
-                    <h5>Yarn Master</h5>
+                    <h5>Fabric Master</h5>
                     <div>
                         <label for="entries">Show</label>
                         <select id="entries"  class="form-control d-inline-block" style="width: 70px;" onchange="enteries(this.value)">

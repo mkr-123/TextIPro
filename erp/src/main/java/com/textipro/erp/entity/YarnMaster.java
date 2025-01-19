@@ -31,6 +31,9 @@ public class YarnMaster {
 	@ManyToOne
 	@JoinColumn(name = "commonSettingsTypes_id", nullable = false)
 	private CommonSettings commonSettingsForTypes;
+	@ManyToOne
+	@JoinColumn(name = "commonSettingsColors_id", nullable = false)
+	private CommonSettings commonSettingsForColors;
 	@Column(nullable = false)
 	private Double conversion;
 }

@@ -21,9 +21,13 @@ import com.textipro.erp.entity.CityM;
 import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CommonTypes;
 import com.textipro.erp.entity.CountryM;
+import com.textipro.erp.entity.Fabric;
 import com.textipro.erp.entity.StateM;
+import com.textipro.erp.entity.TermMaster;
 import com.textipro.erp.entity.YarnMaster;
 import com.textipro.erp.service.MasterService;
+import com.textipro.util.CommonUtils;
+import com.textipro.util.TextIProConstants;
 
 @Controller
 @RequestMapping("/master")
@@ -32,13 +36,9 @@ public class MasterController {
 	private MasterService masterService;
 	
 	@GetMapping("/yarnList")
-	public String yarnList(Model model,@RequestParam(defaultValue ="1")  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
+	public String yarnList(Model model,@RequestParam(defaultValue =TextIProConstants.pageLimit)  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
 		Page<YarnMaster> yarnMasterListPageWise=masterService.getYarnListPageWise(pageEnteries,pageNum);
-		model.addAttribute("yarnList", yarnMasterListPageWise.getContent());
-		model.addAttribute("pageEnteries", pageEnteries);
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("index", pageNum*pageEnteries);
-		model.addAttribute("totalItems", yarnMasterListPageWise.getTotalElements());
+		CommonUtils.paginationUtil(yarnMasterListPageWise.getContent(), pageEnteries, pageNum, yarnMasterListPageWise.getTotalElements(), model);
 		return "yarn";
 		
 	}
@@ -53,6 +53,9 @@ public class MasterController {
 		
 		List<CommonSettings> typeList=masterService.getCommonSettingsBasedOnList(CommonTypes.Types.name());
 		model.addAttribute("typeList", typeList);
+		
+		List<CommonSettings> colorList=masterService.getCommonSettingsBasedOnList(CommonTypes.Colours.name());
+		model.addAttribute("colorList", colorList);
 		return "yarnAdd";
 	}
 	
@@ -64,7 +67,7 @@ public class MasterController {
 	
 	
 	@GetMapping("/settingList")
-	public String settingList(Model model,@RequestParam(defaultValue ="1")  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
+	public String settingList(Model model,@RequestParam(defaultValue =TextIProConstants.pageLimit)  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
 		Page<CommonSettings> commonSettings=masterService.getCommonSettingListPageWise(pageEnteries,pageNum);
 //		model.addAttribute("yarnList", yarnMasterListPageWise.getContent());
 		model.addAttribute("pageEnteries", pageEnteries);
@@ -100,6 +103,9 @@ public class MasterController {
 		
 		List<CommonSettings> typeList=masterService.getCommonSettingsBasedOnList(CommonTypes.Types.name());
 		model.addAttribute("typeList", typeList);
+		
+		List<CommonSettings> colorList=masterService.getCommonSettingsBasedOnList(CommonTypes.Colours.name());
+		model.addAttribute("colorList", colorList);
 		return "yarnAdd";
 	}
 	
@@ -111,14 +117,10 @@ public class MasterController {
 	
 	
 	@GetMapping("/buyerCustomerList")
-	public String buyerCustomerList(Model model,@RequestParam(defaultValue ="1")  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum,@RequestParam("entityTypeString") String entityTypeString) {
+	public String buyerCustomerList(Model model,@RequestParam(defaultValue =TextIProConstants.pageLimit)  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum,@RequestParam("entityTypeString") String entityTypeString) {
 		EntityType entityType = getEntityType(entityTypeString);
 		Page<BuyerM> buyerMList=masterService.getBuyerMListPage(pageEnteries,pageNum,entityType);
-		model.addAttribute("buyerMList", buyerMList.getContent());
-		model.addAttribute("pageEnteries", pageEnteries);
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("index", pageNum*pageEnteries);
-		model.addAttribute("totalItems", buyerMList.getTotalElements());
+		CommonUtils.paginationUtil(buyerMList.getContent(), pageEnteries, pageNum, buyerMList.getTotalElements(), model);
 		model.addAttribute("entityTypeString", entityTypeString);
 		return "buyerCustomerList";
 	}
@@ -161,8 +163,8 @@ public class MasterController {
 		return "redirect:/master/buyerCustomerList?entityTypeString="+buyerM.getEntityType().name(); 
 	}
 	
-	@GetMapping("/buyerMasterEdit/{buyerMasterId}")
-	public String buyerMasterEdit(@PathVariable("buyerMasterId")Long buyerMId,Model model) {
+	@GetMapping("/buyerMasterEdit/{buyerMasterId}/{entityTypeString}")
+	public String buyerMasterEdit(@PathVariable("buyerMasterId")Long buyerMId,Model model,@PathVariable("entityTypeString")String entityTypeString) {
 		BuyerM buyerM=masterService.getBuyerMgetById(buyerMId);
 		model.addAttribute("buyerM", buyerM);
 		
@@ -184,14 +186,15 @@ public class MasterController {
 			cityMs=masterService.getCityList();
 		}
 		model.addAttribute("cityMs", cityMs);
+		model.addAttribute("entityType", entityTypeString);
 		  
 		return "buyeradd";
 	}
 	
-	@GetMapping("/buyerMasterDelete/{buyerMasterId}")
-	public String deleteBuyerByBuyerId(@PathVariable("buyerMasterId")Long buyerMId) {
+	@GetMapping("/buyerMasterDelete/{buyerMasterId}/{entityTypeString}")
+	public String deleteBuyerByBuyerId(@PathVariable("buyerMasterId")Long buyerMId,@PathVariable("entityTypeString") String entityTypeString) {
 		masterService.deleteBuyerM(buyerMId);
-		return "redirect:/master/buyerCustomerList";
+		return "redirect:/master/buyerCustomerList?entityTypeString="+entityTypeString; 
 	}
 	
 	public EntityType getEntityType(String entityTypeString) {
@@ -209,5 +212,61 @@ public class MasterController {
 		}
 		return entityType;
 	}
+	@GetMapping("/termsList")
+	public String getTermsList(Model model,@RequestParam(defaultValue =TextIProConstants.pageLimit)  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
+		Page<TermMaster> termMlist=masterService.getTermMListPage(pageEnteries,pageNum);
+		CommonUtils.paginationUtil(termMlist.getContent(), pageEnteries, pageNum, termMlist.getTotalElements(), model);
+		return "termsList";
+	}
+	@GetMapping("/addTerm")
+	public String addTrem() {
+		return "addTerm";
+	}
+	
+	@PostMapping("/saveTerm")
+	public String saveTerm(TermMaster termMaster) {
+		masterService.saveTermMaster(termMaster);
+		return"redirect:/master/termsList";
+	}
+	
+	@GetMapping("/termMasterEdit/{termId}")
+	public String termMasterEdit(@PathVariable("termId") Long termMasterId,Model model) {
+		TermMaster termMaster=masterService.getTermMasterId(termMasterId);
+		model.addAttribute("termMaster", termMaster);
+		return "addTerm";
+	}
+	
+	@GetMapping("/termMasterDelete/{termDelete}")
+	public String termMasterDelete(@PathVariable("termDelete") Long termDeleteId) {
+		masterService.deleteTermMasterId(termDeleteId);
+		return "redirect:/master/termsList";
+	}
+	
+	@GetMapping("/fabricList")
+	public String fabricList() {
+		return "fabriclist";
+	}
+	
+	@GetMapping("/addFabric")
+	public String fabricAdd(Model model) {
+		List<CommonSettings> weaveList=masterService.getCommonSettingsForWeave(true);
+		model.addAttribute("weaveList", weaveList);
+		
+		List<CommonSettings> uomList=masterService.getCommonSettingsBasedOnList(CommonTypes.Units.name());
+		model.addAttribute("uomList", uomList);
+		
+		List<YarnMaster> yarnMasterList=masterService.getYarnMasters();
+		model.addAttribute("yarnMasterList", yarnMasterList);
+		return "fabricadd";
+	}
+	
+	@PostMapping("/saveFabric")
+	public String saveFabric(Fabric fabric) {
+		masterService.saveFabric(fabric);
+		return "redirect:/master/fabricList";
+	}
+	
+	
+	
 
 }

@@ -5,7 +5,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buyer/Customer Master</title>
+    <title>
+      <c:if test='${entityTypeString eq "buyer"}'>
+                    Buyer/Customer Master
+                    </c:if>
+                    <c:if test='${entityTypeString eq "vendor"}'>
+                    Vendor
+                    </c:if>
+                    <c:if test='${entityTypeString eq "agent"}'>
+                    Sales agent
+                    </c:if>
+                    <c:if test='${entityTypeString eq "consignee"}'>
+                    Consignee
+                    </c:if>
+                    <c:if test='${entityTypeString eq "transportation"}'>
+                    Transportation
+                    </c:if>
+    </title>
     <link href="<c:url value='/css/listpage.css' />" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
@@ -33,11 +49,41 @@
         <main role="main" class="col-md-10 ml-sm-auto px-4">
             <!-- Page Header -->
             <div class="content-header d-flex justify-content-between align-items-center">
-                <h4>Buyer/Customer Master</h4>
+                <h4>
+                  <c:if test='${entityTypeString eq "buyer"}'>
+                    Buyer/Customer Master
+                    </c:if>
+                    <c:if test='${entityTypeString eq "vendor"}'>
+                    Vendor
+                    </c:if>
+                    <c:if test='${entityTypeString eq "agent"}'>
+                    Sales agent
+                    </c:if>
+                    <c:if test='${entityTypeString eq "consignee"}'>
+                    Consignee
+                    </c:if>
+                    <c:if test='${entityTypeString eq "transportation"}'>
+                    Transportation
+                    </c:if>
+                </h4>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">Settings</li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/master/addBuyerCustomer?entityTypeString=${entityTypeString}">Add Buyer</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/master/addBuyerCustomer?entityTypeString=${entityTypeString}">Add  <c:if test='${entityTypeString eq "buyer"}'>
+                    Buyer
+                    </c:if>
+                    <c:if test='${entityTypeString eq "vendor"}'>
+                    Vendor
+                    </c:if>
+                    <c:if test='${entityTypeString eq "agent"}'>
+                    Sales agent
+                    </c:if>
+                    <c:if test='${entityTypeString eq "consignee"}'>
+                    Consignee
+                    </c:if>
+                    <c:if test='${entityTypeString eq "transportation"}'>
+                    Transportation
+                    </c:if></a></li>
                     </ol>
                 </nav>
             </div>
@@ -45,7 +91,23 @@
             <!-- Data Table -->
             <div class="table-container mt-4">
                 <div class="d-flex justify-content-between mb-2">
-                    <h5>Buyer/Customer Master</h5>
+                    <h5>
+                    <c:if test='${entityTypeString eq "buyer"}'>
+                    Buyer/Customer Master
+                    </c:if>
+                    <c:if test='${entityTypeString eq "vendor"}'>
+                    Vendor
+                    </c:if>
+                    <c:if test='${entityTypeString eq "agent"}'>
+                    Sales agent
+                    </c:if>
+                    <c:if test='${entityTypeString eq "consignee"}'>
+                    Consignee
+                    </c:if>
+                    <c:if test='${entityTypeString eq "transportation"}'>
+                    Transportation
+                    </c:if>
+                    </h5>
                     <div>
                         <label for="entries">Show</label>
                         <select id="entries"  class="form-control d-inline-block" style="width: 70px;" onchange="enteries(this.value)">
@@ -71,21 +133,21 @@
                     </thead>
                     <tbody>
                         <c:set var="prevIndex" value="${index}"/>
-                        <c:if test="${not empty buyerMList}">
-                        <c:forEach items="${buyerMList}" var="buyerMList">
+                        <c:if test="${not empty datalist}">
+                        <c:forEach items="${datalist}" var="buyerMList">
                         <tr>
                             <td>${index=index+1}</td>
                             <td>${buyerMList.buyerName}</td>
                             <td>${buyerMList.mobileNo}</td>
                             <td>${buyerMList.cityM.cityName}</td>
                             <td>
-                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/buyerMasterEdit/${buyerMList.buyerMId}">Edit</a>
-                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/buyerMasterDelete/${buyerMList.buyerMId}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/buyerMasterEdit/${buyerMList.buyerMId}/${entityTypeString}">Edit</a>
+                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/buyerMasterDelete/${buyerMList.buyerMId}/${entityTypeString}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
                             </td>
                         </tr>
                         </c:forEach>
                         </c:if>
-                        <c:if test="${empty buyerMList}">
+                        <c:if test="${empty datalist}">
                         <tr id="empty_row">
                         </tr>
                         </c:if>

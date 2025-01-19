@@ -1,5 +1,7 @@
 package com.textipro.erp.entity;
 
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,16 +13,22 @@ import lombok.Data;
 
 @Entity
 @Data
-public class CommonSettings {
+public class TermMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long commonSettingsId;
-	
+	private Long termMasterId;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private CommonTypes types;
-	@Column(nullable = false)
-	private String settingsName;
-	private Boolean weaveType;
+	private TypeOfTerms typeOfTerms;
+	
+	public enum TypeOfTerms{
+		paymentTerms,
+		deliveryTerms
+	}
+	
+	private String title;
+	private String description;
+	private Long noOfDays;
+	private Double intrest;
 
 }

@@ -9,7 +9,9 @@ import com.textipro.erp.entity.BuyerM.EntityType;
 import com.textipro.erp.entity.CityM;
 import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CountryM;
+import com.textipro.erp.entity.Fabric;
 import com.textipro.erp.entity.StateM;
+import com.textipro.erp.entity.TermMaster;
 import com.textipro.erp.entity.YarnMaster;
 
 public interface MasterService {
@@ -47,6 +49,20 @@ public interface MasterService {
 	public List<CityM> getCityList();
 
 	public void deleteBuyerM(Long buyerMId);
+
+	public void saveTermMaster(TermMaster termMaster);
+
+	public Page<TermMaster> getTermMListPage(int pageEnteries, int pageNum);
+
+	public TermMaster getTermMasterId(Long termMasterId);
+
+	public void deleteTermMasterId(Long termDeleteId);
+
+	public List<CommonSettings> getCommonSettingsForWeave(boolean b);
+
+	public List<YarnMaster> getYarnMasters();
+
+	public void saveFabric(Fabric fabric);
 
 
 }

@@ -74,6 +74,18 @@
                     <!-- Add more options as needed -->
                 </select>
             </div>
+                        <div class="form-group">
+                <label for="commonSettingsForColors">Color<sup class="mandatory">*</sup></label>
+          		<select id="commonSettingsForColors" name="commonSettingsForColors" required 
+        oninvalid="this.setCustomValidity('Please select a Color')"
+        oninput="this.setCustomValidity('')">
+                    <option value="">Please Select</option>
+                    <c:forEach items="${colorList}" var="colorList">
+                    <option value="${colorList.commonSettingsId}"${colorList.commonSettingsId == yarnMaster.commonSettingsForColors.commonSettingsId ? 'selected' : ''}>${colorList.settingsName}</option>
+                    </c:forEach>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
             <div class="form-group">
                 <label for="conversion">Conversion<sup class="mandatory">*</sup></label>
                 <input type="number" id="conversion" name="conversion" placeholder="Setting Name" required="required" oninvalid="this.setCustomValidity('Please enter the conversion')" oninput="this.setCustomValidity('')" value="${yarnMaster.conversion}">

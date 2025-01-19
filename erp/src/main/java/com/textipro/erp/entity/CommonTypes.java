@@ -7,6 +7,7 @@ public enum CommonTypes {
 	Finished,
 	Shipping_Mode,
 	Units,
-	Types
+	Types,
+	Page_Limits
 
 }

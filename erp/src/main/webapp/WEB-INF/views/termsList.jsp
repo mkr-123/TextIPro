@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yarn Master</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Term Master</title>
      <link href="<c:url value='/css/listpage.css' />" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
@@ -14,16 +14,13 @@
     </script>
 
 	<script src="${pageContext.request.contextPath}/js/listpage.js"></script>
-    <!-- Custom CSS -->
-    <style>
-        
-    </style>
 </head>
 <body>
-<form name="form" id="form" action="${pageContext.request.contextPath}/master/yarnList">
+<form name="form" id="form" action="${pageContext.request.contextPath}/master/termsList">
 <input type="hidden" id="pageNum" name="pageNum" value=""/>
 <input type="hidden" id="pageEnteries" name="pageEnteries" value=""/>
 </form>
+
 <div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->
@@ -33,11 +30,11 @@
         <main role="main" class="col-md-10 ml-sm-auto px-4">
             <!-- Page Header -->
             <div class="content-header d-flex justify-content-between align-items-center">
-                <h4>Yarn Master</h4>
+                <h4>Term Master</h4>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">Settings</li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/master/addYarn">Add Yarn</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/master/addTerm">Add Term</a></li>
                     </ol>
                 </nav>
             </div>
@@ -45,7 +42,7 @@
             <!-- Data Table -->
             <div class="table-container mt-4">
                 <div class="d-flex justify-content-between mb-2">
-                    <h5>Yarn Master</h5>
+                    <h5>Term Master</h5>
                     <div>
                         <label for="entries">Show</label>
                         <select id="entries"  class="form-control d-inline-block" style="width: 70px;" onchange="enteries(this.value)">
@@ -63,28 +60,22 @@
                     <thead>
                         <tr>
                             <th>S.No</th>
-                            <th>Name</th>
-                            <th>Counts</th>
-                            <th>Units</th>
-                            <th>Types</th>
-                            <th>Conversions</th>
+                            <th>Title</th>
+                            <th>Type</th>
                             <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:set var="prevIndex" value="${index}"/>
                         <c:if test="${not empty datalist}">
-                        <c:forEach items="${datalist}" var="yarnList">
+                        <c:forEach items="${datalist}" var="termMlist">
                         <tr>
                             <td>${index=index+1}</td>
-                            <td>${yarnList.yarnName}</td>
-                            <td>${yarnList.commonSettingsForCounts.settingsName}</td>
-                            <td>${yarnList.commonSettingsForUnits.settingsName}</td>
-                            <td>${yarnList.commonSettingsForTypes.settingsName}</td>
-                            <td>${yarnList.conversion}</td>
+                            <td>${termMlist.title}</td>
+                            <td>${termMlist.typeOfTerms}</td>
                             <td>
-                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/yarnMasterEdit/${yarnList.yarnMasterId}">Edit</a>
-                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/yarnMasterDelete/${yarnList.yarnMasterId}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/termMasterEdit/${termMlist.termMasterId}">Edit</a>
+                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/termMasterDelete/${termMlist.termMasterId}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
                             </td>
                         </tr>
                         </c:forEach>
