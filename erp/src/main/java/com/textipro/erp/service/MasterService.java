@@ -9,6 +9,7 @@ import com.textipro.erp.entity.BuyerM.EntityType;
 import com.textipro.erp.entity.CityM;
 import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CountryM;
+import com.textipro.erp.entity.Fabric;
 import com.textipro.erp.entity.StateM;
 import com.textipro.erp.entity.TermMaster;
 import com.textipro.erp.entity.YarnMaster;
@@ -58,6 +59,10 @@ public interface MasterService {
 	public void deleteTermMasterId(Long termDeleteId);
 
 	public List<CommonSettings> getCommonSettingsForWeave(boolean b);
+
+	public List<YarnMaster> getYarnMasters();
+
+	public void saveFabric(Fabric fabric);
 
 
 }

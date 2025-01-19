@@ -21,6 +21,7 @@ import com.textipro.erp.entity.CityM;
 import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CommonTypes;
 import com.textipro.erp.entity.CountryM;
+import com.textipro.erp.entity.Fabric;
 import com.textipro.erp.entity.StateM;
 import com.textipro.erp.entity.TermMaster;
 import com.textipro.erp.entity.YarnMaster;
@@ -253,8 +254,19 @@ public class MasterController {
 		
 		List<CommonSettings> uomList=masterService.getCommonSettingsBasedOnList(CommonTypes.Units.name());
 		model.addAttribute("uomList", uomList);
+		
+		List<YarnMaster> yarnMasterList=masterService.getYarnMasters();
+		model.addAttribute("yarnMasterList", yarnMasterList);
 		return "fabricadd";
 	}
+	
+	@PostMapping("/saveFabric")
+	public String saveFabric(Fabric fabric) {
+		masterService.saveFabric(fabric);
+		return "redirect:/master/fabricList";
+	}
+	
+	
 	
 
 }

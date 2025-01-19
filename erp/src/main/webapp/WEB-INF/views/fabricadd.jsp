@@ -34,7 +34,7 @@
                 </nav>
             </div>
             <!-- form Data -->
-        <form action="${pageContext.request.contextPath}/master/saveYarn" method="post" class="form-container">
+        <form action="${pageContext.request.contextPath}/master/saveFabric" method="post" class="form-container">
             <div class="form-group">
                 <label for="fabricType">Fabric Type<sup class="mandatory">*</sup></label>
                <%--  <input type="text" id="fabricType" name="fabricType" placeholder="Yarn Name" required="required" oninvalid="this.setCustomValidity('Please enter the yarn name')" oninput="this.setCustomValidity('')" value="${yarnMaster.yarnName}"> --%>
@@ -179,10 +179,11 @@
             <tr >
                 <td>1</td>
                 <td><select name="yarnMasterId">
-                 <option value="">select</option>
-                <option value="1">y</option>
-                
-                </select></td>
+                 <option value="">Select Yarn</option>
+                 <c:forEach items="${yarnMasterList}" var="warpDetails.yarnMasterList">
+                <option value="${yarnMasterList.yarnMasterId}">${yarnMasterList.yarnName}</option>
+                </c:forEach>
+                </select>  </td>
                 <td><input type="number" name="shrinkagePer"> </td>
                 <td><input type="number" name="meters"></td>
                 <td>
@@ -208,9 +209,10 @@
             <tr >
                 <td>1</td>
                 <td><select name="yarnMasterId">
-                 <option value="">select</option>
-                <option value="1">y</option>
-                
+                 <option value="">Select Yarn</option>
+                 <c:forEach items="${yarnMasterList}" var="yarnMasterList">
+                <option value="${yarnMasterList.yarnMasterId}">${yarnMasterList.yarnName}</option>
+                </c:forEach>
                 </select></td>
                 <td><input type="number" name="shrinkagePer"> </td>
                 <td><input type="number" name="meters"></td>

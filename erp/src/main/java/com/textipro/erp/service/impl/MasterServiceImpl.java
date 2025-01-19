@@ -12,6 +12,7 @@ import com.textipro.erp.dao.BuyerMDao;
 import com.textipro.erp.dao.CityMDao;
 import com.textipro.erp.dao.CommonSettingsDao;
 import com.textipro.erp.dao.CountryMDao;
+import com.textipro.erp.dao.FabricDao;
 import com.textipro.erp.dao.StateMDao;
 import com.textipro.erp.dao.TermMasterDao;
 import com.textipro.erp.dao.YarnMasterDao;
@@ -19,6 +20,7 @@ import com.textipro.erp.entity.BuyerM;
 import com.textipro.erp.entity.CityM;
 import com.textipro.erp.entity.CommonSettings;
 import com.textipro.erp.entity.CountryM;
+import com.textipro.erp.entity.Fabric;
 import com.textipro.erp.entity.StateM;
 import com.textipro.erp.entity.TermMaster;
 import com.textipro.erp.entity.YarnMaster;
@@ -48,6 +50,9 @@ public class MasterServiceImpl implements MasterService{
 	
 	@Autowired
 	private TermMasterDao termMasterDao;
+	
+	@Autowired
+	private FabricDao fabricDao;
 
 	@Override
 	public List<CommonSettings> getCommonSettingsBasedOnList(String type) {
@@ -171,6 +176,18 @@ public class MasterServiceImpl implements MasterService{
 	public List<CommonSettings> getCommonSettingsForWeave(boolean b) {
 		// TODO Auto-generated method stub
 		return commonSettingsDao.findAll();
+	}
+
+	@Override
+	public List<YarnMaster> getYarnMasters() {
+		// TODO Auto-generated method stub
+		return yarnMasterDao.findAll();
+	}
+
+	@Override
+	public void saveFabric(Fabric fabric) {
+		// TODO Auto-generated method stub
+		fabricDao.save(fabric);
 	}
 
 	
