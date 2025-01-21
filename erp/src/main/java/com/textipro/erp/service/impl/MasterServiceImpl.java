@@ -23,6 +23,7 @@ import com.textipro.erp.entity.CountryM;
 import com.textipro.erp.entity.Fabric;
 import com.textipro.erp.entity.StateM;
 import com.textipro.erp.entity.TermMaster;
+import com.textipro.erp.entity.WarpDetails;
 import com.textipro.erp.entity.YarnMaster;
 import com.textipro.erp.entity.BuyerM.EntityType;
 import com.textipro.erp.service.MasterService;
@@ -186,7 +187,17 @@ public class MasterServiceImpl implements MasterService{
 
 	@Override
 	public void saveFabric(Fabric fabric) {
-		// TODO Auto-generated method stub
+		if(fabric.getWarpDetails()!=null) {
+//			fabric.getWarpDetails().forEach(wp->{
+//				if(wp.getYarnMaster()!=null)
+//				wp.setFabric(fabric);
+//				}
+//			);
+			   for (WarpDetails warpDetail : fabric.getWarpDetails()) {
+				   if(warpDetail.getYarnMaster()!=null)
+		            warpDetail.setFabric(fabric);
+		        }
+		}
 		fabricDao.save(fabric);
 	}
 

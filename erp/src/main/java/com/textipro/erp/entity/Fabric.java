@@ -2,6 +2,7 @@ package com.textipro.erp.entity;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -44,8 +45,8 @@ public class Fabric {
 	private Double sgst;
 	@Lob
 	private byte[] image;
-	@OneToMany(mappedBy = "fabric")
+	@OneToMany(mappedBy = "fabric", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<WarpDetails> warpDetails;
-	@OneToMany(mappedBy = "fabric")
+	@OneToMany(mappedBy = "fabric", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<WeftDetails> weftDetails;
 }
