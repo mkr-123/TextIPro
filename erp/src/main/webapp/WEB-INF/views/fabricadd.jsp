@@ -208,14 +208,14 @@
         <tbody>
             <tr >
                 <td>1</td>
-                <td><select name="yarnMasterId">
+                <td><select  name="weftDetails[0].yarnMaster">
                  <option value="">Select Yarn</option>
                  <c:forEach items="${yarnMasterList}" var="yarnMasterList">
                 <option value="${yarnMasterList.yarnMasterId}">${yarnMasterList.yarnName}</option>
                 </c:forEach>
                 </select></td>
-                <td><input type="number" name="shrinkagePer"> </td>
-                <td><input type="number" name="meters"></td>
+                <td><input type="number" name="weftDetails[0].shrinkagePer"> </td>
+                <td><input type="number" name="weftDetails[0].meters"></td>
                 <td>
                     <button type="button" id="addRow" class="btn btn-primary btn-sm" onclick="addRowTabel('weftdetails')" >Add</button>
                 </td>

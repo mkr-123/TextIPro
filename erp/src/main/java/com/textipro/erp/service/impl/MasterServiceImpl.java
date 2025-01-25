@@ -85,7 +85,8 @@ public class MasterServiceImpl implements MasterService{
 	@Override
 	public YarnMaster getYarnMasterId(Long yarnMasterId) {
 		
-		return yarnMasterDao.findById(yarnMasterId).get();
+		return yarnMasterDao.findById(yarnMasterId)
+				.orElseThrow(() -> new RuntimeException("YarnMaster not found with id: " + yarnMasterId));
 	}
 
 	@Override
@@ -188,15 +189,23 @@ public class MasterServiceImpl implements MasterService{
 	@Override
 	public void saveFabric(Fabric fabric) {
 		if(fabric.getWarpDetails()!=null) {
-//			fabric.getWarpDetails().forEach(wp->{
-//				if(wp.getYarnMaster()!=null)
-//				wp.setFabric(fabric);
-//				}
-//			);
-			   for (WarpDetails warpDetail : fabric.getWarpDetails()) {
-				   if(warpDetail.getYarnMaster()!=null)
-		            warpDetail.setFabric(fabric);
-		        }
+			fabric.getWarpDetails().forEach(wp->{
+				if(wp.getYarnMaster()!=null)
+				wp.setFabric(fabric);
+				}
+			);
+//			   for (WarpDetails warpDetail : fabric.getWarpDetails()) {
+//				   if(warpDetail.getYarnMaster()!=null)
+//		            warpDetail.setFabric(fabric);
+//		        }
+		}
+		
+		if(fabric.getWeftDetails()!=null) {
+			fabric.getWeftDetails().forEach(wf->{
+				if(wf.getYarnMaster()!=null)
+				wf.setFabric(fabric);
+				}
+			);
 		}
 		fabricDao.save(fabric);
 	}
