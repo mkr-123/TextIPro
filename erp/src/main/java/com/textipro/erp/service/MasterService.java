@@ -64,5 +64,9 @@ public interface MasterService {
 
 	public void saveFabric(Fabric fabric);
 
+	public Page<Fabric> getFabricList(int pageEnteries, int pageNum);
+
+	public void deletFabricMaster(Long fabricMasterId);
+
 
 }

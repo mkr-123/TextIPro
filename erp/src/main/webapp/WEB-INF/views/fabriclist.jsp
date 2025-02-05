@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fabric Master</title>
+    <title>Fabric Master List</title>
      <link href="<c:url value='/css/listpage.css' />" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
@@ -63,28 +63,38 @@
                     <thead>
                         <tr>
                             <th>S.No</th>
-                            <th>Name</th>
-                            <th>Counts</th>
-                            <th>Units</th>
-                            <th>Types</th>
-                            <th>Conversions</th>
-                            <th>Options</th>
+                            <th>Fabric Code</th>
+                            <th>Fabric Name</th>
+                            <th>Weave</th>
+                            <th>Quality</th>
+                            <th>EPI</th>
+                            <th>PPI</th>
+                            <th>Gregie Width</th>
+                            <th>Total end</th>
+                            <th>GSM</th>
+                            <th>GLM</th>
+                            <th>Option</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:set var="prevIndex" value="${index}"/>
                         <c:if test="${not empty datalist}">
-                        <c:forEach items="${datalist}" var="yarnList">
+                        <c:forEach items="${datalist}" var="fabricList">
                         <tr>
                             <td>${index=index+1}</td>
-                            <td>${yarnList.yarnName}</td>
-                            <td>${yarnList.commonSettingsForCounts.settingsName}</td>
-                            <td>${yarnList.commonSettingsForUnits.settingsName}</td>
-                            <td>${yarnList.commonSettingsForTypes.settingsName}</td>
-                            <td>${yarnList.conversion}</td>
+                            <td>${fabricList.fabricCode}</td>
+                            <td>${fabricList.fabricName}</td>
+                            <td>${fabricList.commonSettingsForWeave.settingsName}</td>
+                            <td>${fabricList.fabricQuality}</td>
+                            <td>${fabricList.epi}</td>
+                            <td>${fabricList.ppi}</td>
+                            <td>${fabricList.greigeCode}</td>
+                            <td>${fabricList.totalEnds}</td>
+                            <td>${fabricList.glm}</td>
+                            <td>${fabricList.gsm}</td>
                             <td>
-                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/yarnMasterEdit/${yarnList.yarnMasterId}">Edit</a>
-                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/yarnMasterDelete/${yarnList.yarnMasterId}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/fabricMasterEdit/${fabricList.fabricId}">Edit</a>
+                                <a class="btn btn-sm btn-edit" href="${pageContext.request.contextPath}/master/fabricMasterDelete/${fabricList.fabricId}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
                             </td>
                         </tr>
                         </c:forEach>

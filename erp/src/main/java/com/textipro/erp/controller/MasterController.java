@@ -243,7 +243,9 @@ public class MasterController {
 	}
 	
 	@GetMapping("/fabricList")
-	public String fabricList() {
+	public String fabricList(Model model,@RequestParam(defaultValue =TextIProConstants.pageLimit)  int pageEnteries,@RequestParam(defaultValue ="0")int pageNum) {
+		  Page<Fabric> fabricListPageWise=masterService.getFabricList(pageEnteries,pageNum);
+		  CommonUtils.paginationUtil(fabricListPageWise.getContent(), pageEnteries, pageNum, fabricListPageWise.getTotalElements(), model);
 		return "fabriclist";
 	}
 	
@@ -263,6 +265,12 @@ public class MasterController {
 	@PostMapping("/saveFabric")
 	public String saveFabric(Fabric fabric) {
 		masterService.saveFabric(fabric);
+		return "redirect:/master/fabricList";
+	}
+	
+	@GetMapping("/fabricMasterDelete/{fabricMasterId}")
+	public String fabricMasterDelete(@PathVariable("fabricMasterId") Long fabricMasterId) {
+		masterService.deletFabricMaster(fabricMasterId);
 		return "redirect:/master/fabricList";
 	}
 	

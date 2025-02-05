@@ -12,9 +12,13 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
 @Data
+@ToString(exclude = {"warpDetails", "weftDetails"})
+@EqualsAndHashCode(exclude = {"warpDetails", "weftDetails"})
 public class Fabric {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

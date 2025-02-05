@@ -210,6 +210,17 @@ public class MasterServiceImpl implements MasterService{
 		fabricDao.save(fabric);
 	}
 
+	@Override
+	public Page<Fabric> getFabricList(int pageEnteries, int pageNum) {
+		 Pageable pageable = PageRequest.of(pageNum, pageEnteries);
+		return fabricDao.findAll(pageable);
+	}
+
+	@Override
+	public void deletFabricMaster(Long fabricMasterId) {
+		fabricDao.deleteById(fabricMasterId);
+	}
+
 	
 	
 
